@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EKDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="PaymentVerificationID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tOrderLines" Relationship="Self.fk_Order" FromRole="tOrder" ToRole="tOrderLine" />
+    <NavigationProperty Name="tUser" Relationship="Self.fk_User" FromRole="tOrder" ToRole="tUser" />
+  </EntityType>
+  <EntityType Name="tOrderLine">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tOrder" Relationship="Self.fk_Order" FromRole="tOrderLine" ToRole="tOrder" />
+    <NavigationProperty Name="tProduct" Relationship="Self.fk_Product" FromRole="tOrderLine" ToRole="tProduct" />
+  </EntityType>
+  <EntityType Name="tProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tOrderLines" Relationship="Self.fk_Product" FromRole="tProduct" ToRole="tOrderLine" />
+  </EntityType>
+  <EntityType Name="tUser">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StreetName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FlatNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Town" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tOrders" Relationship="Self.fk_User" FromRole="tUser" ToRole="tOrder" />
+  </EntityType>
+  <Association Name="fk_Order">
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+    <End Role="tOrderLine" Type="Self.tOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tOrderLine">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_User">
+    <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+  </Association>
+  <Association Name="fk_Product">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tOrderLine" Type="Self.tOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tOrderLine">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tOrders" EntityType="Self.tOrder" />
+    <EntitySet Name="tOrderLines" EntityType="Self.tOrderLine" />
+    <EntitySet Name="tProducts" EntityType="Self.tProduct" />
+    <EntitySet Name="tUsers" EntityType="Self.tUser" />
+    <AssociationSet Name="fk_Order" Association="Self.fk_Order">
+      <End Role="tOrder" EntitySet="tOrders" />
+      <End Role="tOrderLine" EntitySet="tOrderLines" />
+    </AssociationSet>
+    <AssociationSet Name="fk_User" Association="Self.fk_User">
+      <End Role="tUser" EntitySet="tUsers" />
+      <End Role="tOrder" EntitySet="tOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Product" Association="Self.fk_Product">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tOrderLine" EntitySet="tOrderLines" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

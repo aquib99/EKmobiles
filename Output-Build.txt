@@ -1,0 +1,3 @@
+﻿1>------ Build started: Project: EKClient, Configuration: Debug Any CPU ------
+1>  EKClient -> C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\bin\EKClient.dll
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

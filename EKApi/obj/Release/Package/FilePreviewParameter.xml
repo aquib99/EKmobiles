@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Microsoft-ApiAppf9dd2bcab98e46909f4b22de40382044" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="  Server=tcp:modb.database.windows.net,1433;Database=EKDB;User ID=moadmin@modb;Password=ekB00278908;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30; " tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="EKApi.Models.Entities-Web.config Connection String" description="" value="EKApi.Models.Entities_ConnectionString" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EKApi.Models.Entities']/@connectionString" />
+  </parameter>
+  <parameter name="EKDBEntities-Web.config Connection String" description="" value="metadata=res://*/Models.Products.csdl|res://*/Models.Products.ssdl|res://*/Models.Products.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:modb.database.windows.net,1433;initial catalog=EKDB;user id=moadmin@modb;password=ekB00278908;multipleactiveresultsets=True;connect timeout=30;encrypt=True;trustservercertificate=False;application name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EKDBEntities']/@connectionString" />
+  </parameter>
+  <parameter name="EKDBEntities11-Web.config Connection String" description="" value="metadata=res://*/Models.EKDBModels.csdl|res://*/Models.EKDBModels.ssdl|res://*/Models.EKDBModels.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:modb.database.windows.net,1433;initial catalog=EKDB;user id=moadmin@modb;password=ekB00278908;connect timeout=30;encrypt=True;trustservercertificate=False;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Firoza\ Asmath\\Documents\\GitHub\\EKmobiles\\EKApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EKDBEntities11']/@connectionString" />
+  </parameter>
+</parameters>
