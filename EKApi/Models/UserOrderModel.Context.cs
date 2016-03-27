@@ -13,10 +13,10 @@ namespace EKApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class EKDBEntities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public EKDBEntities1()
+            : base("name=EKDBEntities1")
         {
         }
     

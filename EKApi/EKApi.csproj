@@ -250,28 +250,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\EKModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EKModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EKModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EKModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Products.Context.cs">
@@ -290,16 +277,31 @@
       <DependentUpon>Products.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>EKModel.tt</DependentUpon>
+      <DependentUpon>UserOrderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderLine.cs">
-      <DependentUpon>EKModel.tt</DependentUpon>
+      <DependentUpon>UserOrderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProduct.cs">
       <DependentUpon>Products.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tUser.cs">
-      <DependentUpon>EKModel.tt</DependentUpon>
+      <DependentUpon>UserOrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserOrderModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserOrderModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserOrderModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserOrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserOrderModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserOrderModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -315,16 +317,6 @@
     <Content Include="Global.asax" />
     <Content Include="Images\iphone6.jpg" />
     <Content Include="Images\S7Edge.jpg" />
-    <Content Include="Models\EKModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EKModel.edmx</DependentUpon>
-      <LastGenOutput>EKModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EKModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EKModel.edmx</DependentUpon>
-      <LastGenOutput>EKModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\Products.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Products.edmx</DependentUpon>
@@ -334,6 +326,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Products.edmx</DependentUpon>
       <LastGenOutput>Products.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UserOrderModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserOrderModel.edmx</DependentUpon>
+      <LastGenOutput>UserOrderModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UserOrderModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserOrderModel.edmx</DependentUpon>
+      <LastGenOutput>UserOrderModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -363,15 +365,15 @@
     <Content Include="Models\Products.edmx.diagram">
       <DependentUpon>Products.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\EKModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EKModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EKModel.edmx.diagram">
-      <DependentUpon>EKModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <EntityDeploy Include="Models\UserOrderModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserOrderModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UserOrderModel.edmx.diagram">
+      <DependentUpon>UserOrderModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\ekmobiles.pubxml" />
     <None Include="Properties\PublishProfiles\EKMobilesApi%28mogroup%29 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\EKMobilesApi%28MoGroup%29.pubxml" />
