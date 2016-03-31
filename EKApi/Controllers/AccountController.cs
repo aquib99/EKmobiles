@@ -73,7 +73,7 @@ namespace EKApi.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-
+        /*
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
@@ -113,7 +113,7 @@ namespace EKApi.Controllers
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
         }
-
+        */
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -133,7 +133,7 @@ namespace EKApi.Controllers
 
             return Ok();
         }
-
+        /*
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
@@ -152,7 +152,7 @@ namespace EKApi.Controllers
 
             return Ok();
         }
-
+        
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
@@ -317,7 +317,7 @@ namespace EKApi.Controllers
 
             return logins;
         }
-
+        */
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -339,7 +339,7 @@ namespace EKApi.Controllers
 
             return Ok();
         }
-
+        /*
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -371,7 +371,7 @@ namespace EKApi.Controllers
                 return GetErrorResult(result); 
             }
             return Ok();
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

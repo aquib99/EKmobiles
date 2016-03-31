@@ -25,8 +25,6 @@ namespace EKApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tOrder> tOrders { get; set; }
-        public virtual DbSet<tOrderLine> tOrderLines { get; set; }
         public virtual DbSet<tUser> tUsers { get; set; }
     }
 }

@@ -9,16 +9,18 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EKApi.Models;
+using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
     [Authorize]
-    //[Authorize(Roles = "Administrator")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private EKDBEntities1 db = new EKDBEntities1();
 
         // GET: api/Users
+        [Authorize(Roles = "Administrator")]
         public IQueryable<tUser> GettUsers()
         {
             return db.tUsers;
@@ -28,53 +30,79 @@ namespace EKApi.Controllers
         [ResponseType(typeof(tUser))]
         public IHttpActionResult GettUser(string id)
         {
-            tUser tUser = db.tUsers.Find(id);
-            if (tUser == null)
+            if (id == this.RequestContext.Principal.Identity.Name)
             {
-                return NotFound();
-            }
+                tUser tUser = db.tUsers.Find(id);
+                if (tUser == null)
+                {
+                    
+                    return NotFound();
+                }
 
-            return Ok(tUser);
+                return Ok(tUser);
+            }
+            else
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
         }
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PuttUser(tUser tUser)
+        public IHttpActionResult PuttUser(tUser User)
         {
-            var id = this.RequestContext.Principal.Identity.Name;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != tUser.Email)
+            if (this.RequestContext.Principal.IsInRole("Administrator"))
             {
-                return BadRequest();
-            }
-
-            db.Entry(tUser).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tUserExists(id))
-                {
-                    return NotFound();
-                }
+                if (tUserExists(User.Email))
+                    db.Entry(User).State = EntityState.Modified;
                 else
+                    db.tUsers.Add(User);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
                 {
                     throw;
                 }
+                return StatusCode(HttpStatusCode.OK);
             }
+            else
+            {
+                if (User.Email == this.RequestContext.Principal.Identity.Name)
+                {
+                    var id = this.RequestContext.Principal.Identity.Name;
+                    if (tUserExists(id))
+                        db.Entry(User).State = EntityState.Modified;
+                    else
+                        db.tUsers.Add(User);
 
-            return StatusCode(HttpStatusCode.NoContent);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        throw;
+                    }
+
+                    return StatusCode(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.Forbidden);
+                }
+            }
         }
 
         // POST: api/Users
-        [ResponseType(typeof(tUser))]
+        /*[ResponseType(typeof(tUser))]
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult PosttUser(tUser tUser)
         {
             if (!ModelState.IsValid)
@@ -101,10 +129,11 @@ namespace EKApi.Controllers
             }
 
             return CreatedAtRoute("DefaultApi", new { id = tUser.Email }, tUser);
-        }
+        }*/
 
         // DELETE: api/Users/5
         [ResponseType(typeof(tUser))]
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult DeletetUser(string id)
         {
             tUser tUser = db.tUsers.Find(id);

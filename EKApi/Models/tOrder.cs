@@ -28,6 +28,5 @@ namespace EKApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderLine> tOrderLines { get; set; }
-        public virtual tUser tUser { get; set; }
     }
 }

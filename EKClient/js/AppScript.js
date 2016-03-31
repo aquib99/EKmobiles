@@ -16,7 +16,7 @@ function getProducts (){
     
     $.ajax({
         async: false,
-        url: 'http://localhost:61409/odata/Products?$top=2',
+        url: 'http://localhost:61409/odata/Products',
         dataType: 'json',
         method: "GET",
         error: function (jqXHR, textStatus, errorThrown) {
@@ -51,14 +51,14 @@ function showProducts(){
 }
 //////////////////////////////////////////// Dom Manipulation and Other Validation ///////////////////
 function getProduct(id){
-	var siteO;
+	/*var siteO;
 	for (var i = 0;i<sites.length;i++)
 	{
 		if (sites[i].id == id) {
 			siteO = sites[i];
 		}
 	}
-	return siteO;
+	return siteO;*/
 }
 var s;
 function showProduct(id){
@@ -92,6 +92,16 @@ $( document ).on( "pageshow", "#addVenue", function() {
 function AddToCart(){
 	
 }
+
+
+$("#signup").click(function () {
+
+    //$("#accountdiv").s
+   // $("#login").slideup(3000);
+
+
+})
+
 
 ///////////////////////////// UI Javascript /////////////////////////////////////////
 $('#addSite').click(function(){

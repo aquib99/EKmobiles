@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EKDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EKDBModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -24,18 +24,6 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="QuantityOrdered" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tUser">
-          <Key>
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="StreetName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="PostCode" Type="varchar" MaxLength="6" Nullable="false" />
-          <Property Name="FlatNo" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Town" Type="varchar" MaxLength="30" Nullable="false" />
-        </EntityType>
         <Association Name="fk_Order">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
           <End Role="tOrderLine" Type="Self.tOrderLine" Multiplicity="*" />
@@ -48,36 +36,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_User">
-          <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
-          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tUser">
-              <PropertyRef Name="Email" />
-            </Principal>
-            <Dependent Role="tOrder">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="EKDBModel1StoreContainer">
+        <EntityContainer Name="EKDBModel2StoreContainer">
           <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderLine" EntityType="Self.tOrderLine" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tUser" EntityType="Self.tUser" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_Order" Association="Self.fk_Order">
             <End Role="tOrder" EntitySet="tOrder" />
             <End Role="tOrderLine" EntitySet="tOrderLine" />
-          </AssociationSet>
-          <AssociationSet Name="fk_User" Association="Self.fk_User">
-            <End Role="tUser" EntitySet="tUser" />
-            <End Role="tOrder" EntitySet="tOrder" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EKDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EKDBModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -88,7 +59,6 @@
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="PaymentVerificationID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tOrderLines" Relationship="Self.fk_Order" FromRole="tOrder" ToRole="tOrderLine" />
-          <NavigationProperty Name="tUser" Relationship="Self.fk_User" FromRole="tOrder" ToRole="tUser" />
         </EntityType>
         <EntityType Name="tOrderLine">
           <Key>
@@ -100,19 +70,6 @@
           <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tOrder" Relationship="Self.fk_Order" FromRole="tOrderLine" ToRole="tOrder" />
         </EntityType>
-        <EntityType Name="tUser">
-          <Key>
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StreetName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PostCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FlatNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Town" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tOrders" Relationship="Self.fk_User" FromRole="tUser" ToRole="tOrder" />
-        </EntityType>
         <Association Name="fk_Order">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
           <End Role="tOrderLine" Type="Self.tOrderLine" Multiplicity="*" />
@@ -125,29 +82,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_User">
-          <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
-          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tUser">
-              <PropertyRef Name="Email" />
-            </Principal>
-            <Dependent Role="tOrder">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="EKDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EKDBEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tOrders" EntityType="Self.tOrder" />
           <EntitySet Name="tOrderLines" EntityType="Self.tOrderLine" />
-          <EntitySet Name="tUsers" EntityType="Self.tUser" />
           <AssociationSet Name="fk_Order" Association="Self.fk_Order">
             <End Role="tOrder" EntitySet="tOrders" />
             <End Role="tOrderLine" EntitySet="tOrderLines" />
-          </AssociationSet>
-          <AssociationSet Name="fk_User" Association="Self.fk_User">
-            <End Role="tUser" EntitySet="tUsers" />
-            <End Role="tOrder" EntitySet="tOrders" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -155,9 +95,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EKDBModel1StoreContainer" CdmEntityContainer="EKDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="EKDBModel2StoreContainer" CdmEntityContainer="EKDBEntities2">
           <EntitySetMapping Name="tOrders">
-            <EntityTypeMapping TypeName="EKDBModel1.tOrder">
+            <EntityTypeMapping TypeName="EKDBModel2.tOrder">
               <MappingFragment StoreEntitySet="tOrder">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -168,24 +108,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tOrderLines">
-            <EntityTypeMapping TypeName="EKDBModel1.tOrderLine">
+            <EntityTypeMapping TypeName="EKDBModel2.tOrderLine">
               <MappingFragment StoreEntitySet="tOrderLine">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tUsers">
-            <EntityTypeMapping TypeName="EKDBModel1.tUser">
-              <MappingFragment StoreEntitySet="tUser">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="FlatNo" ColumnName="FlatNo" />
-                <ScalarProperty Name="Town" ColumnName="Town" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

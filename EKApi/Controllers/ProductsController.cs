@@ -26,6 +26,7 @@ namespace EKApi.Controllers
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Authorize]
     public class ProductsController : ODataController
     {
         private EKDBEntities db = new EKDBEntities();
@@ -33,13 +34,14 @@ namespace EKApi.Controllers
 
         // GET: odata/Products
         [EnableQuery]
-        
+        [AllowAnonymous]
         public IQueryable<tProduct> GetProducts()
         {
             return db.tProducts;
         }
 
         // GET: odata/Products(5)
+        [AllowAnonymous]
         [EnableQuery]
         public SingleResult<tProduct> GettProduct([FromODataUri] int key)
         {
@@ -47,6 +49,7 @@ namespace EKApi.Controllers
         }
 
         // PUT: odata/Products(5)
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult Put([FromODataUri] int key, Delta<tProduct> patch)
         {
             Validate(patch.GetEntity());
@@ -84,6 +87,7 @@ namespace EKApi.Controllers
         }
 
         // POST: odata/Products
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult Post(tProduct tProduct)
         {
             if (!ModelState.IsValid)
@@ -98,7 +102,7 @@ namespace EKApi.Controllers
             return Created(tProduct);
         }
 
-        // PATCH: odata/Products(5)
+       /* // PATCH: odata/Products(5)
         [AcceptVerbs("PATCH", "MERGE")]
         public IHttpActionResult Patch([FromODataUri] int key, Delta<tProduct> patch)
         {
@@ -134,9 +138,10 @@ namespace EKApi.Controllers
             }
 
             return Updated(tProduct);
-        }
+        }*/
 
         // DELETE: odata/Products(5)
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult Delete([FromODataUri] int key)
         {
             tProduct tProduct = db.tProducts.Find(key);

@@ -249,17 +249,33 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\MyOrder.cs" />
+    <Compile Include="Models\OrderProcess.cs" />
+    <Compile Include="Models\Orders.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Products.Context.cs">
       <AutoGen>True</AutoGen>
@@ -277,33 +293,38 @@
       <DependentUpon>Products.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>UserOrderModel.tt</DependentUpon>
+      <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderLine.cs">
-      <DependentUpon>UserOrderModel.tt</DependentUpon>
+      <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProduct.cs">
       <DependentUpon>Products.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tUser.cs">
-      <DependentUpon>UserOrderModel.tt</DependentUpon>
+      <DependentUpon>Users.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserOrderModel.Context.cs">
+    <Compile Include="Models\Users.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserOrderModel.Context.tt</DependentUpon>
+      <DependentUpon>Users.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserOrderModel.cs">
+    <Compile Include="Models\Users.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserOrderModel.tt</DependentUpon>
+      <DependentUpon>Users.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserOrderModel.Designer.cs">
+    <Compile Include="Models\Users.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserOrderModel.edmx</DependentUpon>
+      <DependentUpon>Users.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -315,8 +336,25 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\iphone6.jpg" />
-    <Content Include="Images\S7Edge.jpg" />
+    <Content Include="Images\APPLE-IPHONE-6S-16GB.png" />
+    <Content Include="Images\GALAXY-S7-EDGE-32GB_639.png" />
+    <Content Include="Images\GalaxyS6-32-399.png" />
+    <Content Include="Images\HTC-ONE-A9_GREY_1-419.png" />
+    <Content Include="Images\iphone5s-16-279.png" />
+    <Content Include="Images\LG-G5-499.png" />
+    <Content Include="Images\MICROSOFT-LUMIA-950-469.png" />
+    <Content Include="Images\S6-EdgePlus-32-539.png" />
+    <Content Include="Images\SONY-XPERIA-Z5_GOLD_1449.png" />
+    <Content Include="Models\Orders.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Orders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Products.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Products.edmx</DependentUpon>
@@ -327,15 +365,15 @@
       <DependentUpon>Products.edmx</DependentUpon>
       <LastGenOutput>Products.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\UserOrderModel.Context.tt">
+    <Content Include="Models\Users.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserOrderModel.edmx</DependentUpon>
-      <LastGenOutput>UserOrderModel.Context.cs</LastGenOutput>
+      <DependentUpon>Users.edmx</DependentUpon>
+      <LastGenOutput>Users.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\UserOrderModel.tt">
+    <Content Include="Models\Users.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserOrderModel.edmx</DependentUpon>
-      <LastGenOutput>UserOrderModel.cs</LastGenOutput>
+      <DependentUpon>Users.edmx</DependentUpon>
+      <LastGenOutput>Users.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -367,16 +405,27 @@
     </Content>
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
-    <EntityDeploy Include="Models\UserOrderModel.edmx">
+    <EntityDeploy Include="Models\Users.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserOrderModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Users.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\UserOrderModel.edmx.diagram">
-      <DependentUpon>UserOrderModel.edmx</DependentUpon>
+    <Content Include="Models\Users.edmx.diagram">
+      <DependentUpon>Users.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Orders.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Orders.edmx.diagram">
+      <DependentUpon>Orders.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\ekmobiles.pubxml" />
     <None Include="Properties\PublishProfiles\EKMobilesApi%28mogroup%29 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\EKMobilesApi%28MoGroup%29.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
