@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EKDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Total" Type="money" Nullable="false" />
+    <Property Name="PaymentVerificationID" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tOrderLine">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="QuantityOrdered" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tUser">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="StreetName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PostCode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="FlatNo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Town" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Order">
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+    <End Role="tOrderLine" Type="Self.tOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tOrderLine">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_User">
+    <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tUser">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="tOrder">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EKDBModel1StoreContainer">
+    <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tOrderLine" EntityType="Self.tOrderLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tUser" EntityType="Self.tUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Order" Association="Self.fk_Order">
+      <End Role="tOrder" EntitySet="tOrder" />
+      <End Role="tOrderLine" EntitySet="tOrderLine" />
+    </AssociationSet>
+    <AssociationSet Name="fk_User" Association="Self.fk_User">
+      <End Role="tUser" EntitySet="tUser" />
+      <End Role="tOrder" EntitySet="tOrder" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
