@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EKApi.Models;
+using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     public class OrdersController : ApiController
     {

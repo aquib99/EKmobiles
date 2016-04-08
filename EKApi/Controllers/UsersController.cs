@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     public class UsersController : ApiController
     {

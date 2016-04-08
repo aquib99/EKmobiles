@@ -16,9 +16,11 @@ using Microsoft.Owin.Security.OAuth;
 using EKApi.Models;
 using EKApi.Providers;
 using EKApi.Results;
+using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
