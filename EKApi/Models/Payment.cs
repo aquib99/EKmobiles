@@ -10,19 +10,18 @@ namespace EKApi.Models
         public string chName { get; set; }
         public string cardNo { get; set; }
         public string csv { get; set; }
-        public DateTime ExpDate { get; set; }
+        public string ExpDate { get; set; }
         public string FlatNo { get; set; }
         public string Town { get; set; }
-        public Payment()
+       
+        public string verifypayment()
         {
-
-
-        }
-
-        public void verifypayment()
-        {
-            if ( chName== "") {
-
+            if ( this.chName != "" && this.cardNo!= "") {
+               return Guid.NewGuid().ToString();
+            }
+            else
+            {
+                return "0";
             }
         }
 

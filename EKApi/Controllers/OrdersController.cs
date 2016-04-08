@@ -76,7 +76,7 @@ namespace EKApi.Controllers
         // POST: api/Orders
        
         [ResponseType(typeof(MyOrder))]
-        public IHttpActionResult PosttOrder(MyOrder Order)
+        public IHttpActionResult PosttOrder(MyOrder NewOrder)
         {
 
            // tOrder.tOrderLines.Add(new tOrderLine = { };)
@@ -85,10 +85,38 @@ namespace EKApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            //db.tOrders.Add(tOrder);
-            db.SaveChanges();
-            return NotFound();
-            //return CreatedAtRoute("DefaultApi", new { id = tOrder.Id }, tOrder);
+            tOrder O = NewOrder.processorder();
+            if (O != null)
+            {
+                db.tOrders.Add(O);
+                //}
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DBConcurrencyException)
+                {
+                    throw;
+                }
+            }
+            Order OrderSummary = new Order();
+            OrderSummary.Id = O.Id;
+            OrderSummary.Total = O.Total;
+            OrderSummary.UserID = O.UserID;
+            OrderSummary.PaymentVerificationID = O.PaymentVerificationID;
+            OrderSummary.Date = O.Date;
+
+            foreach (tOrderLine tol in O.tOrderLines) {
+                OrderLine Ol = new OrderLine();
+                Ol.OrderID = tol.OrderID;
+                Ol.ProductID = tol.ProductID;
+                Ol.QuantityOrdered = tol.QuantityOrdered;
+                Ol.Price = tol.Price;
+                OrderSummary.OrderLines.Add(Ol);
+            }
+           // return CreatedAtRoute("DefaultApi", new { id = tUser.Email }, tUser);
+            return Ok(OrderSummary);          
+            // return StatusCode(HttpStatusCode.Created);
         }
 
         // DELETE: api/Orders/5

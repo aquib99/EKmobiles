@@ -14,7 +14,6 @@ using System.Web.Http.Cors;
 namespace EKApi.Controllers
 {
     [Authorize]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private EKDBEntities1 db = new EKDBEntities1();

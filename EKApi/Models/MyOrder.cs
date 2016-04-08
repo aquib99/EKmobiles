@@ -8,13 +8,40 @@ namespace EKApi.Models
     public class MyOrder
     {
         public string UserID { get; set; }
-        //public System.DateTime Date { get; set; }
-        //public decimal Total { get; set; }
-        //public string PaymentVerificationID { get; set; }
-
-        public MyOrder()
+        public ICollection<Item> Items { get; set; }
+        public double Total { get; set; }
+        public Payment PaymentInfo { get; set; }
+    
+        public tOrder processorder()
         {
-            //this.tOrderLines = new HashSet<tOrderLine>();
+            tOrder Order = new tOrder();
+            decimal Total = 0;
+            Stock Stock = new Stock();
+            bool StockCheck = Stock.checkstock(this.Items);
+            string vid = this.PaymentInfo.verifypayment();
+            if (vid != "" && StockCheck == true)
+            {
+               
+                ICollection<tOrderLine> OrderItems = Stock.updatestock(this.Items);
+                foreach (tOrderLine oi in OrderItems)
+                {
+                    Total += oi.Price * oi.QuantityOrdered; 
+                }
+                Order.UserID = UserID;
+                Order.PaymentVerificationID = vid;
+                Order.Date = System.DateTime.Now;
+                Order.Total = Total;
+                Order.tOrderLines = OrderItems;
+                return Order;
+
+            }
+            else
+            {
+                return new tOrder();
+            }
+            
         }
+       
     }
+   
 }

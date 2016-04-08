@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EKDBModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EKDBModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -23,6 +23,7 @@
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="QuantityOrdered" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
         <Association Name="fk_Order">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
@@ -44,8 +45,7 @@
             <End Role="tOrderLine" EntitySet="tOrderLine" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EKDBModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -69,6 +69,7 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tOrder" Relationship="Self.fk_Order" FromRole="tOrderLine" ToRole="tOrder" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
         <Association Name="fk_Order">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
@@ -110,6 +111,7 @@
           <EntitySetMapping Name="tOrderLines">
             <EntityTypeMapping TypeName="EKDBModel2.tOrderLine">
               <MappingFragment StoreEntitySet="tOrderLine">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />

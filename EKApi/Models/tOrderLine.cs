@@ -17,7 +17,9 @@ namespace EKApi.Models
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public int QuantityOrdered { get; set; }
-    
+        public decimal Price { get; set; }
+
+        //
         public virtual tOrder tOrder { get; set; }
     }
 }

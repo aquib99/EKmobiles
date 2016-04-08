@@ -15,6 +15,6 @@ C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\bin\EKClient.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\bin\EKClient.pdb
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\obj\Debug\EKClient.csprojResolveAssemblyReference.cache
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\obj\Debug\EKClient.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\obj\Debug\EKClient.pdb
-C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKClient\obj\Debug\EKClient.csprojResolveAssemblyReference.cache

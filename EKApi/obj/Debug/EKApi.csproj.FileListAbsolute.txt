@@ -1,4 +1,3 @@
-C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Debug\EKApi.csprojResolveAssemblyReference.cache
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\roslyn\csc.exe
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -116,5 +115,6 @@ C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\ko\System.Spatial.re
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\ru\System.Spatial.resources.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Debug\EKApi.csprojResolveAssemblyReference.cache
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Debug\EKApi.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Debug\EKApi.pdb

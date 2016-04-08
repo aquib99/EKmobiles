@@ -1,4 +1,5 @@
-var baseuri = "http://localhost:61409"
+//var baseuri = "http://localhost:61409";
+var baseuri = "https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net";
 var Products;
 				
 ///////// Function will execute on document load
@@ -16,7 +17,7 @@ function getProducts (){
     
     $.ajax({
         async: false,
-        url: 'http://localhost:61409/odata/Products',
+        url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/odata/Products',
         dataType: 'json',
         method: "GET",
         error: function (jqXHR, textStatus, errorThrown) {
@@ -32,6 +33,32 @@ function getProducts (){
     });
 	
 }
+
+var tokendata;
+$("#login").click(function () {
+    var user = $("#username").val();
+    var password = $("#password").val();
+
+    $.ajax({
+        async: false,
+        url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
+        dataType: "",
+        method: "POST",
+        data: "username="+user+"&password="+password+"&grant_type=password",
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ': ' + errorThrown);
+        },
+        success: function (data, textStatus, jqXHR) {
+            console.log(data);
+            tokendata = data;
+            if (data.Error || data.Response) {
+                exists = 0;
+            }
+        }
+    });
+
+
+})
 function showProducts(){
 	
 	if (Products.length!=0){
