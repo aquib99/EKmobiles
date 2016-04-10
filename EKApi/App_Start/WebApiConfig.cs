@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
 using EKApi.Models;
+using System.Web.Http.Cors;
 
 namespace EKApi
 {
@@ -17,6 +18,7 @@ namespace EKApi
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
+            // config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             
@@ -32,7 +34,7 @@ namespace EKApi
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<tProduct>("Products");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-            config.EnableCors();
+           // config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
 
         }
     }

@@ -12,8 +12,8 @@ namespace EKApi.Controllers
     public class ImageController : ApiController
     {
         // GET: api/Image
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
-
+       // [EnableCors(origins: "*", headers: "*", methods: "*")]
+       [Authorize(Roles = "Administrator")]
         public IEnumerable<string> Get()
         {
            // string wanted_path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));

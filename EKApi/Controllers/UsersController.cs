@@ -13,8 +13,8 @@ using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Authorize]
+   // [EnableCors(origins: "*", headers: "*", methods: "*")]
+    
     public class UsersController : ApiController
     {
         private EKDBEntities1 db = new EKDBEntities1();
@@ -27,6 +27,7 @@ namespace EKApi.Controllers
         }
 
         // GET: api/Users/5
+        [Authorize]
         [ResponseType(typeof(tUser))]
         public IHttpActionResult GettUser(string id)
         {
@@ -47,7 +48,8 @@ namespace EKApi.Controllers
             }
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/id?="mdnfk@fnnf.com"
+        [Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PuttUser(tUser User)
         {
@@ -76,6 +78,7 @@ namespace EKApi.Controllers
             {
                 if (User.Email == this.RequestContext.Principal.Identity.Name)
                 {
+                   // this.RequestContext.Configuration.
                     var id = this.RequestContext.Principal.Identity.Name;
                     if (tUserExists(id))
                         db.Entry(User).State = EntityState.Modified;
@@ -95,6 +98,7 @@ namespace EKApi.Controllers
                 }
                 else
                 {
+                    
                     return StatusCode(HttpStatusCode.Forbidden);
                 }
             }

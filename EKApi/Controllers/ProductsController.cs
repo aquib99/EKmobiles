@@ -25,18 +25,23 @@ namespace EKApi.Controllers
     builder.EntitySet<tProduct>("Products");
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Authorize]
+    
+    
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[Authorize]
     public class ProductsController : ODataController
     {
+        
         private EKDBEntities db = new EKDBEntities();
         
 
         // GET: odata/Products
         [EnableQuery]
-        [AllowAnonymous]
+       [AllowAnonymous]
+       //[Authorize]
         public IQueryable<tProduct> GetProducts()
         {
+            string id = this.RequestContext.Principal.Identity.Name;
             return db.tProducts;
         }
 

@@ -1,5 +1,5 @@
-//var baseuri = "http://localhost:61409";
-var baseuri = "https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net";
+var baseuri = "http://localhost:61409";
+//var baseuri = "https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net";
 var Products;
 				
 ///////// Function will execute on document load
@@ -13,13 +13,35 @@ function onError(error) {
           'message: ' + error.message + '\n');
 }
 
-function getProducts (){
+function getProducts() {
+
+    function setHeader(xhr) {
+
+        xhr.setRequestHeader('Authorization', 'bearer goxfuwoZmPiQwb9oZ4DP8fucgsHLeuLe4TYEedXw_FjRcQHIh3W9EjLrVRMsau8BeeL1cIucynS9N1xluXFS46GYpTOY9u2PkGMjVUAwUlhNtuOxgE2PzpAKgtjYwpr7KNGO9qgZIacVGB5jnbOHdJbMr4xrXGPpGcPUNI4fdmybvTeOHM982LPtBxK1ae1rENeNS3QPNRdacwVVkVbzW7PhGGdeWCPS5CEAtWpncPrW5THhruJ6bA4cX_Jz0PmuvHkVIey7-rcbTxC7xNpCr2IeCd2H8tyzZh08JLgUqo375BwtmSGKpz4Z9VNiCNO-JFqeDTGWBV2YBkFNEFO7X5mEnhXEQBoeuEF2cDemlYEgmeno9AP_pNbyyBdqW2CFqbrTA5h19RSxVxE3x45S4hiSeyawHu5dxD_o9DY9r5nLisAiMXT0WZ3lg7Cwule4K3iQWIvKWAlLFO5O9s33feLgkcjJTmlPejuiaUnLjk0');
+       // xhr.setRequestHeader('SomethingElse', 'abcdefg');
+
+    }
+
+   /* $.ajax({
+
+        url: 'www.google.com',
+        type: 'POST',
+        datatype: 'json',
+        success: function () { alert("Success"); },
+        error: function () { alert('Failure!'); },
+        beforeSend: setHeader
+
+    });*/
     
     $.ajax({
         async: false,
-        url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/odata/Products',
+        //url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/odata/Products',
+        url: 'http://localhost:61409/odata/Products',
+
         dataType: 'json',
         method: "GET",
+        //crossDomain: true,
+       beforeSend: setHeader,
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus + ': ' + errorThrown);
         },
@@ -41,7 +63,9 @@ $("#login").click(function () {
 
     $.ajax({
         async: false,
-        url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
+        //url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
+        url: 'http://localhost:61409/token',
+
         dataType: "",
         method: "POST",
         data: "username="+user+"&password="+password+"&grant_type=password",

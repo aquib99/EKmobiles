@@ -13,14 +13,15 @@ using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+   // [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     public class OrdersController : ApiController
     {
         private EKDBEntities2 db = new EKDBEntities2();
 
-         // GET: api/Orders
-         public IQueryable<tOrder> GettOrders()
+        // GET: api/Orders
+        [Authorize(Roles = "Administrator")]
+        public IQueryable<tOrder> GettOrders()
          {
              return db.tOrders;
          }
@@ -75,8 +76,7 @@ namespace EKApi.Controllers
              return StatusCode(HttpStatusCode.NoContent);
          }
 
-        // POST: api/Orders
-       
+        // POST: api/Orders          
         [ResponseType(typeof(MyOrder))]
         public IHttpActionResult PosttOrder(MyOrder NewOrder)
         {
