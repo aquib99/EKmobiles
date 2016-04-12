@@ -9,8 +9,9 @@ namespace EKApi.Models
     {
         public string chName { get; set; }
         public string cardNo { get; set; }
-        public string csv { get; set; }
-        public string ExpDate { get; set; }
+        public string cvc { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
         public string FlatNo { get; set; }
         public string Town { get; set; }
        
