@@ -35,6 +35,8 @@ namespace EKApi
             builder.EntitySet<tProduct>("Products");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
            // config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
+           // config.EnableCors();
+
 
         }
     }

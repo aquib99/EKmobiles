@@ -1,0 +1,50 @@
+<div class="user-order-block">
+    <h1 class="user-column-title">
+              ORDER SUMMERY
+          </h1>
+    <div class="order-content-block">
+        <div class="order-unit order-paid">
+            <div class="order-unit-container">
+                <div class="order-unit-title-block">
+                    <h2 class="order-unit-title">
+              Items to ship                          </h2>
+                </div>
+                <div class="order-unit-info-list">
+
+                    <ul class="left-info-block">
+                        <li>{{ summery.orderSummery.Date | date }} </li>
+                        <li class="name">{{ summery.orderSummery.UserID }}</li>
+                        <li>
+                            Order No.:
+                            <a href="">{{ summery.orderSummery.Id }}</a> </li>
+
+                        <li class=""> Payment ID: {{ summery.orderSummery.PaymentVerificationID }}</li>
+                        <li class="">  <div class="right-info-block">
+                        Total : <i>{{ summery.orderSummery.Total | currency:'&#163'  }}</i>
+                    </div></li>
+                    </ul>
+                   
+                </div>
+                <div class="order-goods-list-info">
+                    <div class="order-unit-goods-info" ng-repeat="item in summery.orderSummery.OrderLines track by $index">
+                        <div >
+                            <a  ui-sref="site.details({productId:item.ProductID})" >
+                                <img class="left-goods-img" ng-src="{{ baseUrl + item.ImageURL }}" title="{{ item.Model}}">
+                            </a>
+                        </div>
+                        <div class="mid-goods-name">
+                            {{ item.Model}}
+                            <br> {{ item.Price | currency:'&#163'  }} × {{ item.QuantityOrdered}} </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-4 col-sm-offset-1">
+        <!--<button type="submit" class="btn btn-primary">Back</button>  -->
+        <a ui-sref="site.products" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>

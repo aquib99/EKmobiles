@@ -1,0 +1,65 @@
+<div class="col-md-6 col-md-offset-3">
+    <center>
+        <h2>Payment Details</h2>
+    </center>
+    <form class="form-horizontal" role="form" name="ccForm">
+        <div class=" row form-group">
+            <div class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-10">
+                    <label for="ccHolderName">Card Holder Name</label>
+                    <input type="text" name="ccHolderName" id="ccHolderName" class="form-control" ng-model="order.orderdetails.PaymentInfo.chName" required />
+                    <span ng-show="ccForm.ccHolderName.$dirty && ccForm.ccHolderName.$error.required" class="help-block">Card Holder Name is required</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-8">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" ng-class="{ 'ng-invalid': ccForm.ccNumber.$invalid }" class="form-control {{ccForm.ccNumber.$ccType | lowercase }}"
+                           id="cardNumber" cc-number name="ccNumber" ng-model="order.orderdetails.PaymentInfo.cardNo">
+                </div>
+                <div class="col-xs-2">
+                    <label for="cvc">CVC</label>
+                    <input type="text" class="form-control" maxlength="3" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="ccCvc" ng-model="order.orderdetails.PaymentInfo.cvc">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="card-number">Expiration</label>
+            <div class="row" cc-exp>
+                <div class="col-xs-3">
+                    <input placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="order.orderdetails.PaymentInfo.Month">
+                </div>
+                <div class="col-xs-3">
+                    <input placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="order.orderdetails.PaymentInfo.Year">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-2">
+                    <label for="flatno">FlatNo</label>
+                    <input type="text" name="flatno" id="flatno" class="form-control" ng-model="order.orderdetails.PaymentInfo.FlatNo" required />
+                    <span ng-show="ccForm.flatno.$dirty && ccForm.flatno.$error.required" class="help-block">FlatNo is required</span>
+                </div>
+                <div class="col-xs-6">
+                    <label for="town">Town</label>
+                    <input type="text" name="town" id="town" class="form-control" ng-model="order.orderdetails.PaymentInfo.Town" required />
+                    <span ng-show="ccForm.town.$dirty && ccForm.town.$error.required" class="help-block">Town is required</span>
+                </div>
+            </div>
+            <div class="ccForm-group">
+                <div class="col-sm-offset-4 ol-xs-2">
+                    <button type="submit" ng-disabled="ccForm.$invalid" class="btn btn-primary" ng-click="order.PlaceOrder()">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </form>

@@ -19,7 +19,7 @@ namespace EKApi
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            //  context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+              //context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)

@@ -301,6 +301,8 @@
     <Content Include="bower_components\rainbow\themes\tricolore.css" />
     <Content Include="bower_components\rainbow\themes\twilight.css" />
     <Content Include="bower_components\rainbow\themes\zenburnesque.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\ngcart.css" />
     <Content Include="favic1on.ico" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -569,6 +571,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\EKClient.pubxml" />
+    <None Include="Properties\PublishProfiles\ekmobiles.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

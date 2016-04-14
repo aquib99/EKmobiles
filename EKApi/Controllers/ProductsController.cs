@@ -34,11 +34,9 @@ namespace EKApi.Controllers
         
         private EKDBEntities db = new EKDBEntities();
         
-
         // GET: odata/Products
         [EnableQuery]
-       [AllowAnonymous]
-       //[Authorize]
+        [AllowAnonymous]
         public IQueryable<tProduct> GetProducts()
         {
             string id = this.RequestContext.Principal.Identity.Name;
@@ -107,43 +105,7 @@ namespace EKApi.Controllers
             return Created(tProduct);
         }
 
-       /* // PATCH: odata/Products(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<tProduct> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            tProduct tProduct = db.tProducts.Find(key);
-            if (tProduct == null)
-            {
-                return NotFound();
-            }
-
-            patch.Patch(tProduct);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tProductExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(tProduct);
-        }*/
+       
 
         // DELETE: odata/Products(5)
         [Authorize(Roles = "Administrator")]

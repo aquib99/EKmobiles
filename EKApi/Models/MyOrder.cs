@@ -19,7 +19,7 @@ namespace EKApi.Models
             Stock Stock = new Stock();
             bool StockCheck = Stock.checkstock(this.Items);
             string vid = this.PaymentInfo.verifypayment();
-            if (vid != "" && StockCheck == true)
+            if (vid != "0" && StockCheck == true)
             {
                
                 ICollection<tOrderLine> OrderItems = Stock.updatestock(this.Items);
@@ -37,7 +37,8 @@ namespace EKApi.Models
             }
             else
             {
-                return new tOrder();
+                tOrder O = null;
+                return O;
             }
             
         }

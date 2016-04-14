@@ -88,34 +88,25 @@ namespace EKApi.Controllers
             }
 
             tOrder O = NewOrder.processorder();
-            if (O != null)
+            if (O!= null)
             {
+                //Add the order ot the DB
                 db.tOrders.Add(O);
-                //}
                 try
                 {
                     db.SaveChanges();
                 }
                 catch (DBConcurrencyException)
                 {
-                    throw;
+                    return BadRequest("DB concurrency exception");
                 }
             }
-            Order OrderSummary = new Order();
-            OrderSummary.Id = O.Id;
-            OrderSummary.Total = O.Total;
-            OrderSummary.UserID = O.UserID;
-            OrderSummary.PaymentVerificationID = O.PaymentVerificationID;
-            OrderSummary.Date = O.Date;
-
-            foreach (tOrderLine tol in O.tOrderLines) {
-                OrderLine Ol = new OrderLine();
-                Ol.OrderID = tol.OrderID;
-                Ol.ProductID = tol.ProductID;
-                Ol.QuantityOrdered = tol.QuantityOrdered;
-                Ol.Price = tol.Price;
-                OrderSummary.OrderLines.Add(Ol);
+            else {
+                return BadRequest("Payment or Stock validation Failed");
             }
+            //Converting the actual DB order class to view model order class for  
+            Order Order = new Order();
+            Order OrderSummary = Order.getOrderSummary(O);
            // return CreatedAtRoute("DefaultApi", new { id = tUser.Email }, tUser);
             return Ok(OrderSummary);          
             // return StatusCode(HttpStatusCode.Created);

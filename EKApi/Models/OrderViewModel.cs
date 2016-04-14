@@ -11,12 +11,15 @@ namespace EKApi.Models
         public int ProductID { get; set; }
         public int QuantityOrdered { get; set; }
         public decimal Price { get; set; }
+        public string Model { get; set; }
+        public string ImageURL { get; set; }
 
     }
 
     public partial class Order
     {
-       // [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        private EKDBEntities db = new EKDBEntities();
+        // [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
             this.OrderLines = new HashSet<OrderLine>();
@@ -30,5 +33,39 @@ namespace EKApi.Models
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<OrderLine> OrderLines { get; set; }
+
+        public Order getOrderSummary(tOrder O)
+        {
+
+            if (O!=null) {
+                Order OrderSummary = new Order();
+                OrderSummary.Id = O.Id;
+                OrderSummary.Total = O.Total;
+                OrderSummary.UserID = O.UserID;
+                OrderSummary.PaymentVerificationID = O.PaymentVerificationID;
+                OrderSummary.Date = O.Date;
+
+                foreach (tOrderLine tol in O.tOrderLines)
+                {
+                    tProduct p = db.tProducts.Find(tol.ProductID);
+                    OrderLine Ol = new OrderLine();
+                    Ol.Model = p.Model;
+                    Ol.ImageURL = p.ImageURL;
+                    Ol.OrderID = tol.OrderID;
+                    Ol.ProductID = tol.ProductID;
+                    Ol.QuantityOrdered = tol.QuantityOrdered;
+                    Ol.Price = tol.Price;
+                    OrderSummary.OrderLines.Add(Ol);
+                }
+
+                return OrderSummary;
+            }
+            else {
+
+                Order nullOrder = null;
+                return nullOrder;
+            }
+
+        }
     }
 }

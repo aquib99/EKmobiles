@@ -1,0 +1,44 @@
+<center>
+    <h2><div class="textintro">MOBILE STORE </div></h2></center>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4" ng-show="filtProducts.length">
+                Sort By:
+                <select ng-model="orderProp">
+                    <option value="Model">Alphabet</option>
+                    <option value="Price">Price</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <div style="width:100%">
+                    <div ng-repeat="m in group" style="width:100px; float:left;">
+                        <b><input type="checkbox" ng-checked="true" ng-init="useBrands[$index] = true" ng-model="useBrands[$index]" />{{m}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <ul class="row-fluid">
+                    <li class="group" ng-repeat="item in filtProducts =( products | filter:filterBrands() | orderBy:orderProp)">
+                        <div class="thumbnail">
+                            <a ui-sref="site.details({productId:item.Id})">
+                                <img ng-src="{{ baseUrl + item.ImageURL }}">
+                                <h4>{{ item.Model }}</h4>
+                            </a>
+                            <h4 class="price">{{ item.Price | currency:'&#163'}}</h4>
+                            <ngcart-addtocart id="{{ item.Id }}" name="{{ item.Model }}" price="{{ item.Price }}" data="item" quantity="{{ 1 }}" quantity-max="{{ item.Quantity }}">
+                                Add To Cart
+                            </ngcart-addtocart>
+                        </div>
+                    </li>
+                    <div class="alert alert-info" ng-show="!filtProducts.length">
+                        <strong>!</strong> No Products found.
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>

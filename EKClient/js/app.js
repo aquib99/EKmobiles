@@ -11,8 +11,8 @@ angular.module('ekmobilesapp',
         'angular-loading-bar',
         'credit-cards'
         ])
-        
 .constant('REST_BASE_URL', 'http://localhost:61409')
+//.constant('REST_BASE_URL', 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net')
 .run (['$rootScope', '$state', '$templateCache', 'AuthenticationService', function($rootScope, $state, $templateCache, AuthenticationService){
     $rootScope.$state = $state;
    
