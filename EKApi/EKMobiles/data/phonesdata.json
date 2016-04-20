@@ -1,0 +1,83 @@
+[
+  {
+    "Id": 1,
+    "Brand": "Apple",
+    "Model": "Iphone 5S",
+    "Description": "No info",
+    "Price": "279.9900",
+    "Quantity": 2,
+    "ImageURL": "/Images/iphone5s-16-279.png"
+  },
+  {
+    "Id": 4,
+    "Brand": "Samsung",
+    "Model": "S6 Edge Plus",
+    "Description": "No info",
+    "Price": "539.9900",
+    "Quantity": 3,
+    "ImageURL": "/Images/S6-EdgePlus-32-539.png"
+  },
+  {
+    "Id": 5,
+    "Brand": "Apple",
+    "Model": "Iphone 6S",
+    "Description": "With 3D Touch, Live Photos, 7000 series aluminium, A9 chip, advanced cameras, 4.7-inch Retina HD display and so much more, you'll see how with iPhone 6s, the only thing that's changed is everything.",
+    "Price": "539.9900",
+    "Quantity": 3,
+    "ImageURL": "/Images/APPLE-IPHONE-6S-16GB.png"
+  },
+  {
+    "Id": 8,
+    "Brand": "Sony",
+    "Model": "Xperia Z5",
+    "Description": "5.2-inch Full HD display with Sony's TRILUMINOS display technology,\r\n23MP camera for awesome photos\r\n,Fingerprint sensor for that extra level of security",
+    "Price": "449.9900",
+    "Quantity": 5,
+    "ImageURL": "/Images/SONY-XPERIA-Z5_GOLD_1449.png"
+  },
+  {
+    "Id": 12,
+    "Brand": "Samsung",
+    "Model": "Galaxy S7 Edge",
+    "Description": "No info",
+    "Price": "639.9900",
+    "Quantity": 2,
+    "ImageURL": "/Images/GALAXY-S7-EDGE-32GB_639.png"
+  },
+  {
+    "Id": 14,
+    "Brand": "HTC",
+    "Model": "One A9",
+    "Description": "A super-slim all-metal body make the phone look and feel great,\r\nA fast and accurate fingerprint scanner is built into the home button,\r\nAndroid 6 Marshmallow software gives you the best that Google has to offer",
+    "Price": "419.9900",
+    "Quantity": 8,
+    "ImageURL": "/Images/HTC-ONE-A9_GREY_1-419.png"
+  },
+  {
+    "Id": 15,
+    "Brand": "LG",
+    "Model": "G5",
+    "Description": "See more with the LG G5's 5.3-inch Quad HD display,Two camera lenses that can be used independently or together for super-wide-angle shots.,Removable battery with easy slide-out mechanism",
+    "Price": "499.9900",
+    "Quantity": 4,
+    "ImageURL": "/Images/LG-G5-499.png"
+  },
+  {
+    "Id": 19,
+    "Brand": "Microsoft",
+    "Model": "Lumia 950 XL",
+    "Description": "See more with the 950 XL's massive 5.7-inch Quad HD display,Capture the moment in awesome detail with the 20MP PureView camera,Totally ready for the future with USB Type-C input",
+    "Price": "469.9900",
+    "Quantity": 3,
+    "ImageURL": "/Images/MICROSOFT-LUMIA-950-469.png"
+  },
+  {
+    "Id": 20,
+    "Brand": "Samsung",
+    "Model": "Galaxy S6",
+    "Description": "No info",
+    "Price": "399.9900",
+    "Quantity": 6,
+    "ImageURL": "/Images/GalaxyS6-32-399.png"
+  }
+]

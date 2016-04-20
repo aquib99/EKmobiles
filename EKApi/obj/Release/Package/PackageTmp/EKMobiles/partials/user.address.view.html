@@ -1,15 +1,16 @@
-<div class="col-md-10 col-md-offset-3">
-    <h2>Update Information</h2>
+<div class="col-md-7 col-md-offset-3">
+    <center>
+        <h2>Update Information</h2></center>
     <form name="form" ng-submit="vm.update()" role="form">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
                     <label for="firstName">First name</label>
                     <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.FirstName" required />
                     <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
                     <label for="lastName">Last name</label>
                     <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.LastName" required />
@@ -18,30 +19,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" ng-model="vm.user.Email" required />
+                    <input type="email" name="email" id="email" class="form-control" ng-model="vm.user.Email" required ng-disabled="true" />
                     <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+                    <span ng-show="!form.email.$error.required && form.email.$error.email && form.email.$dirty" class="help-block">invalid email</span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-group" ng-class="{ 'has-error': form.flatno.$dirty && form.flatno.$error.required }">
                     <label for="flatno">FlatNo</label>
                     <input type="text" name="flatno" id="flatno" class="form-control" ng-model="vm.user.FlatNo" required />
                     <span ng-show="form.flatno.$dirty && form.flatno.$error.required" class="help-block">FlatNo is required</span>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                 <div class="form-group" ng-class="{ 'has-error': form.streetname.$dirty && form.streetname.$error.required }">
                     <label for="streetname">StreetName</label>
                     <input type="text" name="streetname" id="streetname" class="form-control" ng-model="vm.user.StreetName" required />
                     <span ng-show="form.streetname.$dirty && form.streetname.$error.required" class="help-block">StreetName is required</span>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group" ng-class="{ 'has-error': form.town.$dirty && form.town.$error.required }">
                     <label for="town">Town</label>
                     <input type="text" name="town" id="town" class="form-control" ng-model="vm.user.Town" required />
@@ -50,19 +52,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-5 ">
                 <div class="form-group" ng-class="{ 'has-error': form.postcode.$dirty && form.postcode.$error.required }">
                     <label for="postcode">PostCode</label>
-                    <input type="text" name="postcode" id="postcode" class="form-control" ng-model="vm.user.PostCode" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/"  required />
+                    <input type="text" name="postcode" id="postcode" class="form-control" ng-model="vm.user.PostCode" ng-pattern="/^[a-z]{1,2}[0-9][a-z0-9]?\s?[0-9][a-z]{2}$/i" required />
                     <span ng-show="form.postcode.$dirty && form.postcode.$error.required" class="help-block">PostCode is required</span>
-                     <span ng-show="form.postcode.$dirty && form.postcode.$error.pattern" class="help-block">PostCode format is Invalid</span>
+                    <span ng-show="form.postcode.$dirty && form.postcode.$error.pattern" class="help-block">PostCode format is Invalid</span>
                 </div>
             </div>
         </div>
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Update and Proceed</button>
-            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            />
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
     </form>
 </div>

@@ -20,7 +20,7 @@ namespace EKApi.Controllers
         private EKDBEntities1 db = new EKDBEntities1();
 
         // GET: api/Users
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager")]
         public IQueryable<tUser> GettUsers()
         {
             return db.tUsers;
@@ -58,7 +58,7 @@ namespace EKApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (this.RequestContext.Principal.IsInRole("Administrator"))
+            if (this.RequestContext.Principal.IsInRole("Administrator")|| this.RequestContext.Principal.IsInRole("Manager"))
             {
                 if (tUserExists(User.Email))
                     db.Entry(User).State = EntityState.Modified;

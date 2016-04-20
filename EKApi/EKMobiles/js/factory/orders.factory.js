@@ -38,7 +38,6 @@ function factory($http, $rootScope, $q, $log,REST_BASE_URL) {
             deferred.resolve(orderSummery);
             return deferred.promise;
 
-
             //var promise = $http({ method: 'GET', url: '/app/data/phones.json' })
             //  .then(function (response) {
             //      console.log(response);                 

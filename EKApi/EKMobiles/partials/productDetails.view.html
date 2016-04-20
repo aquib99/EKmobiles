@@ -1,9 +1,12 @@
 <div class="col-md-9 col-md-offset-1">
     <h3>{{ product.Brand }}</h3>
     <div class="container-fluid productDetails">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row productInfoRow">
+            <div class="col-xs-6 ">
                 <h2>{{ product.Model }}</h2>
+            </div>
+            <div class="col-xs-6  buttonBox text-right">
+                <a ui-sref="site.products" class="btn btn-primary">Back</a>
             </div>
         </div>
         <div class="row">
@@ -18,14 +21,6 @@
                                   quantity-max="{{ 10 }}">
                     Add To Cart
                 </ngcart-addtocart>
-                <div class="row">
-                    <div class="col-sm-4">
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-1">
-                        <!--<button type="submit" class="btn btn-primary">Back</button>  -->
-                        <a ui-sref="site.products" class="btn btn-primary">Back</a>
-                    </div>
-                </div>
             </div>
 
         </div>

@@ -40,7 +40,7 @@ function getProducts() {
 
         dataType: 'json',
         method: "GET",
-        crossDomain: true,
+       // crossDomain: true,
       // beforeSend: setHeader,
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus + ': ' + errorThrown);
@@ -63,8 +63,8 @@ $("#login").click(function () {
 
     $.ajax({
         async: false,
-        url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
-       // url: 'http://localhost:61409/token',
+       // url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
+        url: 'http://localhost:61409/token',
 
         dataType: "",
         method: "POST",

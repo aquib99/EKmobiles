@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('ekmobilesapp')
-    .controller('OrderCtrl', ['Orders', 'FlashService', '$state', '$sessionStorage', 'ngCart', function(Orders, FlashService, $state, $sessionStorage, ngCart) {
+    .controller('OrderCtrl', ['Orders', 'FlashService', '$state', '$sessionStorage', 'ngCart', '$timeout', function (Orders, FlashService, $state, $sessionStorage, ngCart, $timeout) {
         var order = this;
         order.orderdetails = {};
         order.orderdetails.UserID = $sessionStorage.userInfo.userName;
@@ -24,18 +24,38 @@ angular.module('ekmobilesapp')
         function PlaceOrder() {
             order.dataLoading = true;
             Orders.placeOrder(order.orderdetails)
-                .success(function(data) {
-                    FlashService.Success('Order Placed successful')
+                .then(function(data) {
+                    FlashService.Success('Order Placed successful', true)
                     $timeout(
-                        function() {
-                            $state.go('site.index');
+                        function () {
+                            ngCart.empty();
+                            $state.go('site.orderSummery');
                         }, 3000);
 
-
-                }).error(function(status, data) {
-                    FlashService.Error('Error in placing order : ' + JSON.stringify(status));
+                }, function(error) {
+                    FlashService.Error('Error in placing order : ' + JSON.stringify(error));
                     order.dataLoading = false;
                 });
         }
     }]
-    );
+    )
+    
+    .controller('orderSummeryCtrl', ['Orders', 'FlashService', '$state', '$sessionStorage', '$timeout', 'ngCart', 'REST_BASE_URL',
+        function (Orders, FlashService, $state, $sessionStorage, $timeout, ngCart, REST_BASE_URL) {
+        var summery = this;       
+        summery.orderSummery = null;
+        summery.baseUrl = REST_BASE_URL;
+        
+        Orders.getOrderSummery().then(function(data) {
+            summery.orderSummery = data;
+            if (!data) {
+                FlashService.Error('Error with order summery')
+                $timeout(
+                    function () {
+                        ngCart.empty();
+                        $state.go('site.products');
+                    }, 3000);
+            }
+        });
+    }]
+    )

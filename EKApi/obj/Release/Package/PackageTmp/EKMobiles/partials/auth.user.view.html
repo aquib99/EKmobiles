@@ -1,16 +1,18 @@
 <div style="align-content:flex-start" ng-controller="AdminUserCtrl">
     <ul class="nav navbar-nav navbar-right" ng-hide="auth.isAuthenticated">
-        <li><a class="btn btn-link glyphicon glyphicon-user" ui-sref="site.login">&nbsp;Login</a></li>
+        <li><a class="btn btn-link glyphicon glyphicon-user" ui-sref="site.login({returnUrl:'site.index'})">&nbsp;Login</a></li>
     </ul>
-
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isAuthenticated" style="padding: 10px 0 0 0;">
-        <span uib-dropdown on-toggle="toggled(open)">
-                        <a class="btn-link" id="simple-dropdown" uib-dropdown-toggle> <span class="glyphicon glyphicon-user"></span>&nbsp;
-        {{auth.userName}}
-        </a>
-        <ul uib-dropdown-menu aria-labelledby="simple-dropdown" ng-show="auth.isAuthenticated">
-            <li><a class="" ng-click="logout()">Logout</a></li>
-        </ul>
-        </span>
+        <div class="dropdown">
+            <a class="btn-link dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;
+                {{auth.userName}}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="" ui-sref="site.update({returnUrl:'site.index'})">Update Profile {{ $state }}</a></li>
+                <li><a class="" ng-click="logout()">Logout</a></li>
+            </ul>
+        </div>
     </ul>
 </div>

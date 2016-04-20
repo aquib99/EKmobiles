@@ -52,7 +52,7 @@ namespace EKApi.Controllers
         }
 
         // PUT: odata/Products(5)
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager,StockController")]
         public IHttpActionResult Put([FromODataUri] int key, Delta<tProduct> patch)
         {
             Validate(patch.GetEntity());
@@ -90,7 +90,7 @@ namespace EKApi.Controllers
         }
 
         // POST: odata/Products
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager,StockController")]
         public IHttpActionResult Post(tProduct tProduct)
         {
             if (!ModelState.IsValid)
@@ -108,7 +108,7 @@ namespace EKApi.Controllers
        
 
         // DELETE: odata/Products(5)
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager,StockController")]
         public IHttpActionResult Delete([FromODataUri] int key)
         {
             tProduct tProduct = db.tProducts.Find(key);

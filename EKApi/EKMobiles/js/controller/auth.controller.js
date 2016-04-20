@@ -16,13 +16,19 @@ angular.module('ekmobilesapp')
                         AuthenticationService.userName = data.userName;
                         $sessionStorage.userInfo = data;
                         //$state.go('site.index');
-                        $state.go($stateParams.returnUrl);
+                        if ($stateParams.returnUrl == "site.update")
+                        {
+                            $state.go($stateParams.returnUrl, { 'returnUrl': 'site.checkout' });
+                        } else {
+                            $state.go($stateParams.returnUrl);
+                        }
+                        
                         $scope.dataLoading = false;
                     }).error(function (status, data) {
                         console.log(status);
                         console.log(data);
                         $scope.hasError = true;
-                        FlashService.Error(status.error_description || null);
+                        FlashService.Error(status);
                         $scope.dataLoading = false;
                     });
                 }
@@ -32,7 +38,7 @@ angular.module('ekmobilesapp')
                 if (AuthenticationService.isAuthenticated) {
                     AuthenticationService.isAuthenticated = false;
                     delete $sessionStorage.userInfo;
-                    $state.go('site.login');
+                    $state.go('site.login', { 'returnUrl': 'site.index' });
                 }
             }
         }
@@ -50,6 +56,7 @@ angular.module('ekmobilesapp')
                 UserService.Update(vm.user)
                     .success(function (data) {
                         // FlashService.Success('Information updated successful', true);
+                        //$stateParams.returnUrl = $stateParams.returnUrl | 'site.checkout';
                         $state.go($stateParams.returnUrl);
                     }).error(function (status, data) {
                         FlashService.Error('Information update error : ' + JSON.stringify(status));
@@ -64,13 +71,17 @@ angular.module('ekmobilesapp')
                 vm.user = data;
                 console.log(data);
             }).error(function (status, data) {
-                FlashService.Error('Error in loading user information : ' + JSON.stringify(status));
+                if (data != 404) {
+                    FlashService.Error('Error in loading user information : ' + JSON.stringify(status));                    
+                }
+                vm.user = {};
+                vm.user.Email = $sessionStorage.userInfo.userName;
                 vm.dataLoading = false;
             });
         }
     ])
-    .controller('RegisterController', ['UserService', '$location', '$rootScope', 'FlashService',
-        function RegisterController(UserService, $location, $rootScope, FlashService) {
+    .controller('RegisterController', ['UserService', '$location', '$rootScope', '$state', 'FlashService',
+        function RegisterController(UserService, $location, $rootScope,$state, FlashService) {
             var vm = this;
 
             vm.register = register;
@@ -80,7 +91,7 @@ angular.module('ekmobilesapp')
                 UserService.Create(vm.user)
                     .success(function (data) {
                         FlashService.Success('Registration successful', true);
-                        $location.path('/login');
+                        $state.go('site.login', { 'returnUrl': 'site.index' });
                     }).error(function (status, data) {
                         FlashService.Error('Registration unsuccessful : ' + status.Message);
                         vm.dataLoading = false;

@@ -339,6 +339,44 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="docs\css\print.css" />
+    <Content Include="docs\css\reset.css" />
+    <Content Include="docs\css\screen.css" />
+    <Content Include="docs\css\style.css" />
+    <Content Include="docs\css\typography.css" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-700.svg" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-regular.svg" />
+    <Content Include="docs\images\explorer_icons.png" />
+    <Content Include="docs\images\favicon-16x16.png" />
+    <Content Include="docs\images\favicon-32x32.png" />
+    <Content Include="docs\images\favicon.ico" />
+    <Content Include="docs\images\logo-single.png" />
+    <Content Include="docs\images\logo_small.png" />
+    <Content Include="docs\images\pet_store_api.png" />
+    <Content Include="docs\images\throbber.gif" />
+    <Content Include="docs\images\wordnik_api.png" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\lang\en.js" />
+    <Content Include="docs\lang\es.js" />
+    <Content Include="docs\lang\ja.js" />
+    <Content Include="docs\lang\pt.js" />
+    <Content Include="docs\lang\ru.js" />
+    <Content Include="docs\lang\tr.js" />
+    <Content Include="docs\lang\translator.js" />
+    <Content Include="docs\lang\zh-cn.js" />
+    <Content Include="docs\lib\backbone-min.js" />
+    <Content Include="docs\lib\handlebars-2.0.0.js" />
+    <Content Include="docs\lib\highlight.7.3.pack.js" />
+    <Content Include="docs\lib\jquery-1.8.0.min.js" />
+    <Content Include="docs\lib\jquery.ba-bbq.min.js" />
+    <Content Include="docs\lib\jquery.slideto.min.js" />
+    <Content Include="docs\lib\jquery.wiggle.min.js" />
+    <Content Include="docs\lib\marked.js" />
+    <Content Include="docs\lib\swagger-oauth.js" />
+    <Content Include="docs\lib\underscore-min.js" />
+    <Content Include="docs\o2c.html" />
+    <Content Include="docs\swagger-ui.js" />
+    <Content Include="docs\swagger-ui.min.js" />
     <Content Include="EKMobiles\angular-busy.html" />
     <Content Include="EKMobiles\bower_components\angular-animate\angular-animate.js" />
     <Content Include="EKMobiles\bower_components\angular-animate\angular-animate.min.js" />
@@ -346,6 +384,7 @@
     <Content Include="EKMobiles\bower_components\angular-bootstrap\.gitignore" />
     <Content Include="EKMobiles\bower_components\angular-bootstrap\index.js" />
     <Content Include="EKMobiles\bower_components\angular-bootstrap\ui-bootstrap-csp.css" />
+    <Content Include="EKMobiles\bower_components\angular-bootstrap\ui-bootstrap-tpls-0.13.0.min.js" />
     <Content Include="EKMobiles\bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="EKMobiles\bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="EKMobiles\bower_components\angular-bootstrap\ui-bootstrap.js" />
@@ -613,9 +652,9 @@
     <Content Include="EKMobiles\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="EKMobiles\img\noise_light-grey.jpg" />
     <Content Include="EKMobiles\index.html" />
+    <Content Include="EKMobiles\index1.html" />
     <Content Include="EKMobiles\js\app.js" />
     <Content Include="EKMobiles\js\controller\auth.controller.js" />
-    <Content Include="EKMobiles\js\controller\checkout.controller.js" />
     <Content Include="EKMobiles\js\controller\home.controller.js" />
     <Content Include="EKMobiles\js\controller\payment.controller.js" />
     <Content Include="EKMobiles\js\controller\products.controller.js" />
@@ -627,8 +666,7 @@
     <Content Include="EKMobiles\partials\auth.register.view.html" />
     <Content Include="EKMobiles\partials\auth.user.view.html" />
     <Content Include="EKMobiles\partials\cart.html" />
-    <Content Include="EKMobiles\partials\docs.html" />
-    <Content Include="EKMobiles\partials\index.html" />
+    <Content Include="EKMobiles\partials\home.view.html" />
     <Content Include="EKMobiles\partials\orderSummery.view.html" />
     <Content Include="EKMobiles\partials\payment.view.html" />
     <Content Include="EKMobiles\partials\productDetails.view.html" />
@@ -642,6 +680,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\APPLE-IPHONE-6S-16GB.png" />
+    <Content Include="Images\EKMobiles.png" />
     <Content Include="Images\GALAXY-S7-EDGE-32GB_639.png" />
     <Content Include="Images\GalaxyS6-32-399.png" />
     <Content Include="Images\HTC-ONE-A9_GREY_1-419.png" />
@@ -724,6 +763,19 @@
     <Content Include="Models\Orders.edmx.diagram">
       <DependentUpon>Orders.edmx</DependentUpon>
     </Content>
+    <Content Include="docs\fonts\droid-sans-v6-latin-700.eot" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-700.ttf" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-700.woff" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-700.woff2" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-regular.eot" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-regular.ttf" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-regular.woff" />
+    <Content Include="docs\fonts\droid-sans-v6-latin-regular.woff2" />
+    <Content Include="docs\lib\underscore-min.map" />
+    <Resource Include="docs\api.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <BrowseToURL>docs/api.json</BrowseToURL>
+    </Resource>
     <Content Include="EKMobiles\bower_components\angular-animate\.bower.json" />
     <Content Include="EKMobiles\bower_components\angular-animate\angular-animate.min.js.map" />
     <Content Include="EKMobiles\bower_components\angular-animate\bower.json" />
@@ -902,6 +954,7 @@
     <Content Include="EKMobiles\bower_components\rainbow\util\builder.py" />
     <Content Include="EKMobiles\bower_components\rainbow\util\compile.py" />
     <Content Include="EKMobiles\data\phones.json" />
+    <Content Include="EKMobiles\data\phonesdata.json" />
     <Content Include="EKMobiles\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="EKMobiles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="EKMobiles\fonts\glyphicons-halflings-regular.woff" />

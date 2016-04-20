@@ -13,21 +13,26 @@ using System.Web.Http.Cors;
 
 namespace EKApi.Controllers
 {
-   // [EnableCors(origins: "*", headers: "*", methods: "*")]
+    // [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     public class OrdersController : ApiController
     {
         private EKDBEntities2 db = new EKDBEntities2();
 
         // GET: api/Orders
-        [Authorize(Roles = "Administrator")]
-        public IQueryable<tOrder> GettOrders()
+        [Authorize(Roles = "Administrator,Manager")]
+        public List<Order> GettOrders()
          {
-             return db.tOrders;
+            List<tOrder> Orders = new List<tOrder>();
+            Orders = db.tOrders.ToList();
+            List<Order> ViewOrders = new List<Order>();
+            Order VO = new Order();
+            ViewOrders = VO.getOrders(Orders);
+            return ViewOrders;
          }
 
         // GET: api/Orders/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager")]
         [ResponseType(typeof(tOrder))]
          public IHttpActionResult GettOrder(int id)
          {
@@ -36,12 +41,13 @@ namespace EKApi.Controllers
              {
                  return NotFound();
              }
-
-             return Ok(tOrder);
+            Order Order = new Order();
+            Order OrderSummary = Order.getOrderSummary(tOrder);
+            return Ok(OrderSummary);
          }
 
         // PUT: api/Orders/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager")]
         [ResponseType(typeof(void))]
          public IHttpActionResult PuttOrder(int id, tOrder tOrder)
          {
@@ -113,7 +119,7 @@ namespace EKApi.Controllers
         }
 
         // DELETE: api/Orders/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Manager")]
         [ResponseType(typeof(tOrder))]
         public IHttpActionResult DeletetOrder(int id)
         {
@@ -125,8 +131,7 @@ namespace EKApi.Controllers
 
             db.tOrders.Remove(tOrder);
             db.SaveChanges();
-
-            return Ok(tOrder);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

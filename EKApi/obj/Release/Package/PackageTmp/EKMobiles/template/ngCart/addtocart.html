@@ -1,18 +1,17 @@
-<div ng-hide="attrs.id">
-    <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
-
+<div ng-hide="attrs.id">    
+    <button class="cartbtn btn-5 btn-5a glyphicon glyphicon-shopping-cart" ng-disabled="true" ng-transclude><span>Add to cart</span></button>
 </div>
 <div ng-show="attrs.id">
-    <div>
-        <span ng-show="quantityMax">
-            <select name="quantity" id="quantity" ng-model="q"
-                    ng-options=" v for v in qtyOpt"></select>
-        </span>
-        <a class="btn btn-sm btn-primary"
-           ng-click="ngCart.addItem(id, name, price, q, data)"
-           ng-transclude></a>
+    <div ng-hide="inCart() || qtyOpt==0">
+        <button class="cartbtn btn-5 btn-5a glyphicon glyphicon-shopping-cart" ng-click="ngCart.addItem(id, name, price, 1, data)"><span>Add to cart</span></button>
     </div>
-    <mark  ng-show="inCart()">
-        This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a>
+    <div ng-show="inCart()">
+        <mark >
+            This item is in your cart.
+        </mark>
+        <button class="cartbtn btn-5 btn-5a glyphicon glyphicon-remove-sign" ng-click="ngCart.removeItemById(id)"><span>Remove</span></button>
+    </div>
+    <mark ng-show="qtyOpt==0">
+        Out of stock
     </mark>
 </div>

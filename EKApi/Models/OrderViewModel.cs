@@ -37,35 +37,54 @@ namespace EKApi.Models
         public Order getOrderSummary(tOrder O)
         {
 
-            if (O!=null) {
-                Order OrderSummary = new Order();
-                OrderSummary.Id = O.Id;
-                OrderSummary.Total = O.Total;
-                OrderSummary.UserID = O.UserID;
-                OrderSummary.PaymentVerificationID = O.PaymentVerificationID;
-                OrderSummary.Date = O.Date;
+            List<tOrder> tableOrders = new List<tOrder>();
+            tableOrders.Add(O);
 
-                foreach (tOrderLine tol in O.tOrderLines)
-                {
-                    tProduct p = db.tProducts.Find(tol.ProductID);
-                    OrderLine Ol = new OrderLine();
-                    Ol.Model = p.Model;
-                    Ol.ImageURL = p.ImageURL;
-                    Ol.OrderID = tol.OrderID;
-                    Ol.ProductID = tol.ProductID;
-                    Ol.QuantityOrdered = tol.QuantityOrdered;
-                    Ol.Price = tol.Price;
-                    OrderSummary.OrderLines.Add(Ol);
-                }
-
-                return OrderSummary;
+            List<Order> ViewOrders = new List<Order>();
+            ViewOrders =getOrders(tableOrders);
+            if (ViewOrders[0] != null)
+            {
+                return ViewOrders[0];
             }
-            else {
-
+            else
+            {
                 Order nullOrder = null;
                 return nullOrder;
-            }
 
+            }
+            
+            
+
+        }
+        public List<Order> getOrders(List<tOrder> Orders)
+        {
+            List<Order> ViewOrders =new List<Order>();
+            foreach (tOrder O in Orders)
+            {
+                if (O != null)
+                {
+                    Order OrderSummary = new Order();
+                    OrderSummary.Id = O.Id;
+                    OrderSummary.Total = O.Total;
+                    OrderSummary.UserID = O.UserID;
+                    OrderSummary.PaymentVerificationID = O.PaymentVerificationID;
+                    OrderSummary.Date = O.Date;
+                    foreach (tOrderLine tol in O.tOrderLines)
+                    {
+                        tProduct p = db.tProducts.Find(tol.ProductID);
+                        OrderLine Ol = new OrderLine();
+                        Ol.Model = p.Model;
+                        Ol.ImageURL = p.ImageURL;
+                        Ol.OrderID = tol.OrderID;
+                        Ol.ProductID = tol.ProductID;
+                        Ol.QuantityOrdered = tol.QuantityOrdered;
+                        Ol.Price = tol.Price;
+                        OrderSummary.OrderLines.Add(Ol);
+                    }
+                    ViewOrders.Add(OrderSummary);
+                }
+            }
+            return ViewOrders;
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row" style="height: 305px">
+                <carousel interval="myInterval">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <div class="row vertical-align">
+                            <div class="col-sm-6 productImg" show-when="large">
+                                <img ng-src="{{slide.image}}" style="margin:auto;">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12"><h4>{{ slide.model }}</h4></div>
+                                    <div class="col-sm-12"><p>{{slide.price}}</p></div>
+                                    <div class="col-sm-12"><p>{{slide.description}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EK Mobiles API</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+    <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='css/reset.css' media='print' rel='stylesheet' type='text/css' />
+    <link href='css/print.css' media='print' rel='stylesheet' type='text/css' />
+    <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+    <script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
+    <script src='lib/underscore-min.js' type='text/javascript'></script>
+    <script src='lib/backbone-min.js' type='text/javascript'></script>
+    <script src='swagger-ui.js' type='text/javascript'></script>
+    <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+    <script src='lib/marked.js' type='text/javascript'></script>
+    <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+
+    <!-- Some basic translations -->
+    <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
+    <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+    <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+
+    <script type="text/javascript">
+        $(function () {
+            var url = window.location.search.match(/url=([^&]+)/);
+            if (url && url.length > 1) {
+                url = decodeURIComponent(url[1]);
+            } else {
+                url = "api.json";
+                //url = "/EKApi/docs/api.json";
+            }
+
+            // Pre load translate...
+            if (window.SwaggerTranslator) {
+                window.SwaggerTranslator.translate();
+            }
+            window.swaggerUi = new SwaggerUi({
+                url: url,
+                dom_id: "swagger-ui-container",
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                onComplete: function (swaggerApi, swaggerUi) {
+                    if (typeof initOAuth == "function") {
+                        initOAuth({
+                            clientId: "your-client-id",
+                            clientSecret: "your-client-secret",
+                            realm: "your-realms",
+                            appName: "your-app-name",
+                            scopeSeparator: ","
+                        });
+                    }
+
+                    if (window.SwaggerTranslator) {
+                        window.SwaggerTranslator.translate();
+                    }
+
+                    $('pre code').each(function (i, e) {
+                        hljs.highlightBlock(e)
+                    });
+                    swaggerApi.setHost(window.location.host);
+                    //addApiKeyAuthorization();
+                },
+                onFailure: function (data) {
+                    log("Unable to Load SwaggerUI");
+                },
+                docExpansion: "none",
+                apisSorter: "alpha",
+                validatorUrl: null,
+                showRequestHeaders: false
+            });
+
+            function addApiKeyAuthorization2() {
+                var key = encodeURIComponent($('#input_apiKey')[0].value);
+                if (key && key.trim() != "") {
+                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
+                    window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+                    log("added key " + key);
+                }
+            }
+
+            
+            function addApiKeyAuthorization(token) {
+                /*var username = encodeURIComponent($('#input_username')[0].value);
+                var password = encodeURIComponent($('#input_password')[0].value);
+                if (username && username.trim() != "" && password && password.trim() != "") {
+                    var key = 'Basic ' + window.btoa(username + ':' + password);
+                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header");
+                    window.swaggerUi.api.clientAuthorizations.add("key", apiKeyAuth);
+                    log("added key " + key);
+                }*/
+               // if (username && username.trim() != "" && password && password.trim() != "") {
+                    var token = 'Bearer ' + token;
+                    var apiTokenAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", token, "header");
+                    window.swaggerUi.api.clientAuthorizations.add("key", apiTokenAuth);
+                    log("added key " + token);
+               // }
+            }
+
+            $("#authenticate").click(function () {
+                var user = $("#input_username").val();
+                var password = $("#input_password").val();
+
+               $.ajax({
+                    dataType: "json",
+                    url: 'http://localhost:61409/token',
+                    data: "username=" + user + "&password=" + password + "&grant_type=password",
+                    type: "POST",
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    crossDomain: true,
+                    cache: true,
+                    success: function (data) {
+                        console.log(data);
+                        addApiKeyAuthorization(data.access_token)
+                        username = data.userName;
+                        $("#username").html(username);
+                        alert("Authenticated as : "+ username);
+                    },
+                    error: function (jqXHR, exception, errorstr) {
+                        console.log(jqXHR);
+                        alert(errorstr);
+                    }
+                });
+                /*$.ajax({
+                    dataType: "json",
+                    //async: false,
+                    //url: 'https://microsoft-apiappf9dd2bcab98e46909f4b22de40382044.azurewebsites.net/token',
+                    url: 'http://localhost:61409/token',
+                    //contentType: "application/x-www-form-urlencoded",
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    method: "POST",
+                    data : "username=manager@ekmobiles.com&password=Password.123&grant_type=password",
+                    //data: "username=" + user + "&password=" + password + "&grant_type=password",        
+                    //data: { "username": user, "password": password, "grant_type": "password" },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus + ': ' + errorThrown);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        tokendata = data;
+                        addApiKeyAuthorization(data.access_token)
+                        if (data.Error || data.Response) {
+                            exists = 0;
+                        }
+                    }
+                });*/
+
+
+            })
+           // $('#input_apiKey').change(addApiKeyAuthorization2);
+           // $('#input_username').change(addApiKeyAuthorization);
+           // $('#input_password').change(addApiKeyAuthorization);
+
+            // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
+            /*
+              var apiKey = "myApiKeyXXXX123456789";
+              $('#input_apiKey').val(apiKey);
+            */
+
+            window.swaggerUi.load();
+
+            function log() {
+                if ('console' in window) {
+                    console.log.apply(console, arguments);
+                }
+            }
+        });
+        
+    </script>
+</head>
+
+<body class="swagger-section">
+    <div id='header'>
+        <div class="swagger-ui-wrap">
+            <a id="logo" href="/">EK Mobiles</a>
+            <form id='api_selector'>
+                <div class='input'><input placeholder="username" id="input_username" name="username" type="text" /></div>
+                <div class='input'><input placeholder="password" id="input_password" name="password" type="password" /></div>
+                <div class='input' ><input id="authenticate" name="Authenticate" type="button" value="Authenticate" /></div>
+                <div class='input'><h3 style="color:white" id="username" > </h3></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
+    <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</body>
+</html>

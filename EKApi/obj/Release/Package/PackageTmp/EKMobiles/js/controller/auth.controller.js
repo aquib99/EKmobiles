@@ -1,28 +1,34 @@
 'use strict';
 
 angular.module('ekmobilesapp')
-    .controller('AdminUserCtrl', ['$scope', '$location', '$sessionStorage', '$rootScope', '$state','$stateParams',
+    .controller('AdminUserCtrl', ['$scope', '$location', '$sessionStorage', '$rootScope', '$state', '$stateParams',
         'UserService', 'AuthenticationService', 'FlashService', '$window', '$timeout',
-        function AdminUserCtrl($scope, $location, $sessionStorage, $rootScope, $state,$stateParams,
+        function AdminUserCtrl($scope, $location, $sessionStorage, $rootScope, $state, $stateParams,
             UserService, AuthenticationService, FlashService, $window, $timeout) {
 
             $scope.auth = AuthenticationService;
             //Admin User Controller (login, logout)
             $scope.logIn = function logIn(username, password) {
                 if (username !== undefined && password !== undefined) {
-                    
-                    UserService.logIn(username, password).success(function(data) {
+
+                    $scope.ngPromise = UserService.logIn(username, password).success(function (data) {
                         AuthenticationService.isAuthenticated = true;
                         AuthenticationService.userName = data.userName;
                         $sessionStorage.userInfo = data;
-                        $state.go('site.index');
-                        // $state.go($stateParams.toState, $stateParams.toParams);
+                        //$state.go('site.index');
+                        if ($stateParams.returnUrl == "site.update")
+                        {
+                            $state.go($stateParams.returnUrl, { 'returnUrl': 'site.checkout' });
+                        } else {
+                            $state.go($stateParams.returnUrl);
+                        }
+                        
                         $scope.dataLoading = false;
-                    }).error(function(status, data) {
+                    }).error(function (status, data) {
                         console.log(status);
                         console.log(data);
                         $scope.hasError = true;
-                        FlashService.Error(status.error_description || null);
+                        FlashService.Error(status);
                         $scope.dataLoading = false;
                     });
                 }
@@ -32,58 +38,79 @@ angular.module('ekmobilesapp')
                 if (AuthenticationService.isAuthenticated) {
                     AuthenticationService.isAuthenticated = false;
                     delete $sessionStorage.userInfo;
-                    $state.go('site.login');
+                    $state.go('site.login', { 'returnUrl': 'site.index' });
                 }
             }
         }
 
     ])
     .controller('UserAddressCtrl', ['$scope', '$location', '$sessionStorage', '$rootScope', '$state',
-        'UserService', 'AuthenticationService', 'FlashService', '$window', '$timeout',
+        'UserService', 'AuthenticationService', 'FlashService', '$window', '$timeout', '$stateParams',
         function AdminUserCtrl($scope, $location, $sessionStorage, $rootScope, $state,
-            UserService, AuthenticationService, FlashService, $window, $timeout) {
+            UserService, AuthenticationService, FlashService, $window, $timeout, $stateParams) {
 
             var vm = this;
-          
+
             vm.update = function update() {
                 vm.dataLoading = true;
                 UserService.Update(vm.user)
-                    .success(function(data) {
+                    .success(function (data) {
                         // FlashService.Success('Information updated successful', true);
-                        $state.go('site.checkout');
-                    }).error(function(status, data) {
+                        //$stateParams.returnUrl = $stateParams.returnUrl | 'site.checkout';
+                        $state.go($stateParams.returnUrl);
+                    }).error(function (status, data) {
                         FlashService.Error('Information update error : ' + JSON.stringify(status));
                         vm.dataLoading = false;
+                        $state.go($stateParams.returnUrl);
                     });
             }
-            
+
             UserService.getUser()
-            .success(function(data) {
+            .success(function (data) {
                 // FlashService.Success('User Information successful', true);
                 vm.user = data;
                 console.log(data);
-            }).error(function(status, data) {
-                FlashService.Error('Error in loading user information : ' + JSON.stringify(status));
+            }).error(function (status, data) {
+                if (data != 404) {
+                    FlashService.Error('Error in loading user information : ' + JSON.stringify(status));                    
+                }
+                vm.user = {};
+                vm.user.Email = $sessionStorage.userInfo.userName;
                 vm.dataLoading = false;
             });
-
-
         }
-
     ])
-    .factory('AuthenticationService', function($sessionStorage) {
-        var auth = {
-            isAuthenticated: false,
-            userName: null
-        }
-        if ($sessionStorage.userInfo) {
-            auth.isAuthenticated = true;
-            auth.userName = $sessionStorage.userInfo.userName
-        }
+    .controller('RegisterController', ['UserService', '$location', '$rootScope', '$state', 'FlashService',
+        function RegisterController(UserService, $location, $rootScope,$state, FlashService) {
+            var vm = this;
 
-        return auth;
-    })
-    .factory('UserService',function($http,$sessionStorage, REST_BASE_URL) {
+            vm.register = register;
+
+            function register() {
+                vm.dataLoading = true;
+                UserService.Create(vm.user)
+                    .success(function (data) {
+                        FlashService.Success('Registration successful', true);
+                        $state.go('site.login', { 'returnUrl': 'site.index' });
+                    }).error(function (status, data) {
+                        FlashService.Error('Registration unsuccessful : ' + status.Message);
+                        vm.dataLoading = false;
+                    });
+            }
+        }])
+ .factory('AuthenticationService', function ($sessionStorage) {
+     var auth = {
+         isAuthenticated: false,
+         userName: null
+     }
+     if ($sessionStorage.userInfo) {
+         auth.isAuthenticated = true;
+         auth.userName = $sessionStorage.userInfo.userName
+     }
+
+     return auth;
+ })
+    .factory('UserService', function ($http, $sessionStorage, REST_BASE_URL) {
 
         return {
             logIn: function (username, password) {
@@ -97,27 +124,28 @@ angular.module('ekmobilesapp')
                 return $http(req);
             },
 
-            logOut: function() {
+            logOut: function () {
 
             },
 
-            Create: function(user) {
+            Create: function (user) {
                 return $http.post(REST_BASE_URL + '/api/Account/Register', user);
             },
 
-            Update: function(user) {
+            Update: function (user) {
                 return $http.put(REST_BASE_URL + '/api/Users', user);
             },
 
-            getUser: function() {
-                    return $http.get(REST_BASE_URL + '/api/Users/?id=' + $sessionStorage.userInfo.userName);
+            getUser: function () {
+                var username = $sessionStorage.userInfo ? $sessionStorage.userInfo.userName : null;
+                return $http.get(REST_BASE_URL + '/api/Users/?id=' + username);
             }
 
         };
     })
-    .factory('TokenInterceptor', function($q, $sessionStorage, $location, AuthenticationService) {
+    .factory('TokenInterceptor', function ($q, $sessionStorage, $location, AuthenticationService) {
         return {
-            request: function(config) {
+            request: function (config) {
                 config.headers = config.headers || {};
                 if ($sessionStorage.userInfo) {
                     config.headers.Authorization = 'Bearer ' + $sessionStorage.userInfo.access_token;
@@ -125,12 +153,12 @@ angular.module('ekmobilesapp')
                 return config;
             },
 
-            requestError: function(rejection) {
+            requestError: function (rejection) {
                 return $q.reject(rejection);
             },
 
             /* Set Authentication.isAuthenticated to true if 200 received */
-            response: function(response) {
+            response: function (response) {
                 if (response != null && response.status == 200 && $sessionStorage.userInfo && !AuthenticationService.isAuthenticated) {
                     AuthenticationService.isAuthenticated = true;
 
@@ -139,7 +167,7 @@ angular.module('ekmobilesapp')
             },
 
             /* Revoke client authentication if 401 is received */
-            responseError: function(rejection) {
+            responseError: function (rejection) {
                 if (rejection != null && rejection.status === 401 && ($sessionStorage.userInfo || AuthenticationService.isAuthenticated)) {
                     delete $sessionStorage.userInfo;
                     AuthenticationService.isAuthenticated = false;
@@ -150,38 +178,45 @@ angular.module('ekmobilesapp')
             }
         };
     })
-    .directive('ngUserView', [function() {
+    .directive('ngUserView', [function () {
         return {
             restrict: 'E',
             controller: 'AdminUserCtrl',
             scope: {},
-            templateUrl: function(element, attrs) {
+            templateUrl: function (element, attrs) {
                 if (typeof attrs.templateUrl == 'undefined') {
                     return 'partials/auth.user.view.html';
                 } else {
                     return attrs.templateUrl;
                 }
             },
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
 
             }
         };
     }])
-    .controller('RegisterController', ['UserService', '$location', '$rootScope', 'FlashService',
-        function RegisterController(UserService, $location, $rootScope, FlashService) {
-            var vm = this;
+    .directive('passwordConfirm', function () {
 
-            vm.register = register;
+        return {
+            restrict: 'A',
+            scope: {
+                matchTarget: '=',
+            },
+            require: 'ngModel',
+            link: function link(scope, elem, attrs, ctrl) {
+                var validator = function (value) {
+                    ctrl.$setValidity('noMatch', value === scope.matchTarget);
+                    return value;
+                }
 
-            function register() {
-                vm.dataLoading = true;
-                UserService.Create(vm.user)
-                    .success(function(data) {
-                        FlashService.Success('Registration successful', true);
-                        $location.path('/login');
-                    }).error(function(status, data) {
-                        FlashService.Error('Registration unsuccessful : ' + status.Message);
-                        vm.dataLoading = false;
-                    });
+                ctrl.$parsers.unshift(validator);
+                ctrl.$formatters.push(validator);
+
+                // This is to force validator when the original password gets changed
+                scope.$watch('matchTarget', function (newval, oldval) {
+                    validator(ctrl.$viewValue);
+                });
+
             }
-        }]);
+        }
+    })

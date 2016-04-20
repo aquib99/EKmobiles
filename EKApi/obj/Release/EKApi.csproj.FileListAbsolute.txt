@@ -120,3 +120,4 @@ C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Release\EKApi.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Release\EKApi.pdb
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\Microsoft.Owin.Cors.dll
 C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\bin\Microsoft.Owin.Cors.xml
+C:\Users\Firoza Asmath\Documents\GitHub\EKmobiles\EKApi\obj\Release\EKApi.g.resources

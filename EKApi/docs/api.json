@@ -1,0 +1,925 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "description": "EKMobile is an e-commerce website specialised in selling mobile phones and this is the officia REST API Documentation for the Online store.",
+        "title": "EK Mobiles"
+    },
+    "host": "EKMobiles.com",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/token": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "description": "This endpoint allow users to retrieve a token if the appropriate credintials provided, once the token is retrieved the user is able to access allowed resources according to the users role",
+                "operationId": "Account_Logout1",
+                "consumes": [
+                    "url-encoded"
+                ],
+                "produces": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "Credentials",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Credentials"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/token"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Account/Logout": {
+            "post": {
+                "description": "This endpoint allow users to logout (clears the token from the system which will invalidate the token",
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "Account_Logout",
+                "consumes": [
+                    "url-encoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Object"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Account/ChangePassword": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "Account_ChangePassword",
+                "description": "This endpoint allow users to chenge thier existing password, user has to be authenticated in order to access this resource",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "model",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ChangePasswordBindingModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Object"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Account/Register": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "Account_Register",
+                "description": "This endpoint allow users to register for the system, by default user will not be assigned any roles (standard customer role)",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "model",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RegisterBindingModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Object"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/odata/Products": {
+            "get": {
+                "description": "The Products endpoint returns information about the EK Mobiles product. The response includes the ID,Model and other details about each product, and lists the products in the proper display order.the Endpoint is Odata enabled in order for advance requests.",
+                "tags": [
+                    "Products"
+                ],
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "description": "The Products endpoint returns information about the EK Mobiles product. The response includes the ID,Model and other details about each product, and lists the products in the proper display order.the Endpoint is Odata enabled in order for advance requests.",
+                "tags": [
+                    "Products"
+                ],
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "Product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/odata/Products({id})": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "consumes": [],
+                "description": "This endpoint allows user to retrive a specific product by its id, Anonymous access is sllowed on this rersource",
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "This endpoint allow administrators,managers, stock controllers to add edit products",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "tOrder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Void"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "consumes": [],
+                "description": "This endpoint allow admadministrators,managers, stock controllers to delete products",
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "operationId": "Orders_GettOrders",
+                "consumes": [],
+                "description": "This endpoint allow administrators and managers to get all orders",
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "operationId": "Orders_PosttOrder",
+                "description": "This endpoint allow users to make orders , user has to be authenticated in order to access this endpoimt",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "NewOrder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "operationId": "Orders_GettOrder",
+                "description": "This endpoint allow administrators and managers to get a specific product by its ID",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "operationId": "Orders_PuttOrder",
+                "description": "This endpoint allow administrators and managers to edit Orders",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "tOrder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/tOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Void"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "operationId": "Orders_DeletetOrder",
+                "description": "This endpoint allow administrators and managers to delete Orders",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "Users_GettUsers",
+                "description": "This endpoint allow administrators and managers to get all store customers ",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "Users_PuttUser",
+                "description": "This endpoint allow users to update there shipping information. user has to be authenticated in order to consume this endpoint",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Void"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/Users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "Users_GettUser",
+                "consumes": [],
+                "description": "This endpoint allow users to retrive user profile information, user has to be authenticated in order to use this endpoint",
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "Users_DeletetUser",
+                "consumes": [],
+                "description": "This endpoint allow Administrators and Managers to delete a user",
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "Object": {
+            "type": "object",
+            "properties": {}
+        },
+        "ChangePasswordBindingModel": {
+            "required": [
+                "OldPassword",
+                "NewPassword"
+            ],
+            "type": "object",
+            "properties": {
+                "OldPassword": {
+                    "type": "string"
+                },
+                "NewPassword": {
+                    "type": "string"
+                },
+                "ConfirmPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "RegisterBindingModel": {
+            "required": [
+                "Email",
+                "Password"
+            ],
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "ConfirmPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "tOrder": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "UserID": {
+                    "type": "string"
+                },
+                "Date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Total": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentVerificationID": {
+                    "type": "string"
+                },
+                "tOrderLines": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tOrderLine"
+                    }
+                }
+            }
+        },
+        "tOrderLine": {
+            "type": "object",
+            "properties": {
+                "OrderID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "ProductID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "QuantityOrdered": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Price": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "tOrder": {
+                    "$ref": "#/definitions/tOrder"
+                }
+            }
+        },
+        "MyOrder": {
+            "type": "object",
+            "properties": {
+                "UserID": {
+                    "type": "string"
+                },
+                "Items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Item"
+                    }
+                },
+                "Total": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentInfo": {
+                    "$ref": "#/definitions/Payment"
+                }
+            }
+        },
+        "Item": {
+            "type": "object",
+            "properties": {
+                "ProductID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Quantity": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "Payment": {
+            "type": "object",
+            "properties": {
+                "chName": {
+                    "type": "string"
+                },
+                "cardNo": {
+                    "type": "string"
+                },
+                "cvc": {
+                    "type": "string"
+                },
+                "Month": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Year": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "FlatNo": {
+                    "type": "string"
+                },
+                "Town": {
+                    "type": "string"
+                }
+            }
+        },
+        "Void": {
+            "type": "object",
+            "properties": {}
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "FirstName": {
+                    "type": "string"
+                },
+                "LastName": {
+                    "type": "string"
+                },
+                "StreetName": {
+                    "type": "string"
+                },
+                "PostCode": {
+                    "type": "string"
+                },
+                "FlatNo": {
+                    "type": "string"
+                },
+                "Town": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "type": "object",
+            "properties": {
+                "ProductId": {
+                    "type": "integer",
+                    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+                },
+                "Description": {
+                    "type": "string",
+                    "description": "Description of product."
+                },
+                "Price": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Brand": {
+                    "type": "string",
+                    "description": "Product Brand"
+                },
+                "Quantity": {
+                    "type": "string",
+                    "description": "Quantity of of available stock"
+                },
+                "ImageURL": {
+                    "type": "string",
+                    "description": "Image URL representing the product"
+                }
+            }
+        },
+        "token": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "token_typee": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                ".issued": {
+                    "type": "string"
+                },
+                ".expires": {
+                    "type": "string"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "UserID": {
+                    "type": "string"
+                },
+                "Date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Total": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentVerificationID": {
+                    "type": "string"
+                },
+                "OrderLines": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrderLine"
+                    }
+                }
+            }
+        },
+        "OrderLine": {
+            "type": "object",
+            "properties": {
+                "OrderID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "ProductID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "QuantityOrdered": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Price": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Model": {
+                    "type": "string"
+                },
+                "ImageURL": {
+                    "type": "string"
+                }
+            }
+        },
+        "Credentials": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "grant_type": {
+                    "type": "string",
+                    "default": "password"
+                }
+            }
+        }
+    }
+}

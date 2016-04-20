@@ -1,16 +1,16 @@
 
-
 angular
     .module('ekmobilesapp')
-    .controller('main', ['$http', '$filter', 'ngCart', '$scope', 'products','REST_BASE_URL', function($http, $filter, ngCart, $scope, products,REST_BASE_URL) {
+    .controller('productsCtrl', ['$http', '$filter', 'ngCart', '$scope', 'products', 'REST_BASE_URL', function ($http, $filter, ngCart, $scope, products, REST_BASE_URL) {
         $scope.baseUrl = REST_BASE_URL;
         ngCart.setShipping(10.99);
         ngCart.setTaxRate(13);
         $scope.useBrands = [];
-
+        $scope.dataLoading = true;
         $scope.$products = products.getProducts().then(function(data) {
             $scope.products = data;
             $scope.group = $filter('groupBy')($scope.products, 'Brand');
+            $scope.dataLoading = false;
         });
         $scope.filterBrands = function() {
             return function(p) {

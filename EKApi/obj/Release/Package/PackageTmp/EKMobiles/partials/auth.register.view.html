@@ -1,26 +1,30 @@
 <div class="col-md-6 col-md-offset-3">
-    <h2>Register</h2>
+    <center>
+        <h2>Register</h2></center>
     <form name="form" ng-submit="vm.register()" role="form">
         <div class="form-group" ng-class="{ 'has-error': form.Email.$dirty && form.Email.$error.required }">
             <label for="Email">Email</label>
-            <input type="text" name="Email" id="Email" class="form-control" ng-model="vm.user.Email" required />
+            <input type="Email" name="Email" id="Email" class="form-control" ng-model="vm.user.Email" required />
             <span ng-show="form.Email.$dirty && form.Email.$error.required" class="help-block">Email is required</span>
+            <span ng-show="!form.Email.$error.required && form.Email.$error.email && form.Email.$dirty" class="help-block">invalid email</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.Password.$dirty && form.Password.$error.required }">
             <label for="Password">Password</label>
-            <input type="Password" name="Password" id="Password" class="form-control" ng-model="vm.user.Password" required />
+            <input type="Password" name="Password" id="Password" class="form-control" ng-model="vm.user.Password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required />
             <span ng-show="form.Password.$dirty && form.Password.$error.required" class="help-block">Password is required</span>
+            <span ng-show="!form.Password.$error.required && (form.Password.$error.minlength || form.Password.$error.maxlength) && form.Password.$dirty">Passwords must be between 8 and 20 characters.</span>
+            <span ng-show="!form.Password.$error.required && !form.Password.$error.minlength && !form.Password.$error.maxlength && form.Password.$error.pattern && form.Password.$dirty">Must contain one lower &amp; uppercase letter, one special character and a number.</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.ConfirmPassword.$dirty && form.ConfirmPassword.$error.required }">
             <label for="ConfirmPassword">Confirm Password</label>
-            <input type="Password" name="ConfirmPassword" id="ConfirmPassword" class="form-control" ng-model="vm.user.ConfirmPassword" required />
+            <input type="Password" name="ConfirmPassword" id="ConfirmPassword" class="form-control" ng-model="vm.user.ConfirmPassword" password-confirm match-target="vm.user.Password" required />
             <span ng-show="form.ConfirmPassword.$dirty && form.ConfirmPassword.$error.required" class="help-block">Confirm Password is required</span>
-            <span ng-show="form.ConfirmPassword.$dirty && form.Password == form.ConfirmPassword" class="help-block">Password and Confirm Password must be matched</span>
+            <span ng-show="!form.ConfirmPassword.$error.required && form.ConfirmPassword.$error.noMatch && form.Password.$dirty">Passwords do not match.</span>
         </div>
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
             <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a href="/login" class="btn btn-link">Cancel</a>
+            <a ui-sref="site.login({returnUrl:'site.index'})" class="btn btn-link">Cancel</a>
         </div>
     </form>
 </div>

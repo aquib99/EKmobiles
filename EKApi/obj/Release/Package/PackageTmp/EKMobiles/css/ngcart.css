@@ -40,13 +40,18 @@ table tfoot td{
 }
 
 .thumbnail{
-    height: 400px;
+    height: 269px;
     width: 250px;
-    padding-top:10px; 
+    border: solid 1px #ccc;
+    margin: 3px;
+    padding: 8px 9px;
+    box-shadow: 1px 4px 5px #aaa;
 }
 .thumbnail img{
-     width: 60%;
-}.thumbnail p{
+     width: 45%;
+     height: 60%;
+}
+.thumbnail p{
      height:63px;
     overflow: hidden;
     font-size: 12px;
@@ -55,7 +60,7 @@ table tfoot td{
     color:#3a1
 }
 .thumbnail h3 {
-    height: 50px;
+    height: 35px;
 }
 
 .thumbnail .detail{
@@ -63,6 +68,7 @@ table tfoot td{
     width: 400px;
     padding-top:10px; 
 }
+
 .nav path {
     fill:#fff
 }
@@ -131,30 +137,37 @@ code.block {
   .row-fluid .group {
     width: 100%;
   }
-  .productDetails img{
-      width: 200px;
+  .productImg img{
+      height: 80%;
+      width: 60%;
   }
   .productDetails {
       height: 100%;
   }
+  .thumbnail{
+     height: 100%;
+    }
 }
 @media (min-width: 401px) and (max-width: 767px) {
     .row-fluid .group {
-        width: 48%;
+        width: 40%;
+    }
+    .thumbnail{
+     height: 100%;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .row-fluid .group {
-    width: 32%;
+    width: 28%;
   }
 }
 @media (min-width: 992px) {
   .row-fluid .group {
-    width: 30%;
+    width: 25%;
   }
+ 
+
 }
-
-
 
 /* Have to set height explicity on ui-view 
 to prevent collapsing during animation*/
@@ -265,6 +278,7 @@ footer {
 
 .thumbnail:hover {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+    background-color:rgba(123, 4, 155, 0.04);
 }
 
 .textintro {
@@ -272,6 +286,53 @@ footer {
     color: white;
     font-size: 30px;
 }
+
+
+@media (min-width: 768px) {
+    .bs-docs-header {
+        padding-top: 60px;
+        padding-bottom: 60px;
+        font-size: 24px;
+        text-align: left;
+    }
+}
+.bs-docs-header {
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+.bs-docs-header, .bs-docs-masthead {
+    position: relative;
+    padding: 30px 0;
+    color: #cdbfe3;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color:rgba(74, 16, 133, 0.6);
+    background-image: -moz-radial-gradient(50% 50%, circle farthest-corner, rgba(74, 16, 133, 0.6), rgba(0, 0, 255, 0.5) 74%);
+    background-image: -webkit-radial-gradient(50% 50%, circle farthest-corner, rgba(74, 16, 133, 0.6), rgba(0, 0, 255, 0.5) 74%);
+    background-image: -o-radial-gradient(50% 50%, circle farthest-corner, rgba(74, 16, 133, 0.6), rgba(0, 0, 255, 0.5) 74%);
+    background-image: -ms-radial-gradient(50% 50%, circle farthest-corner, rgba(74, 16, 133, 0.6), rgba(0, 0, 255, 0.5) 74%);
+    background-image: radial-gradient(50% 50%, circle farthest-corner, rgba(74, 16, 133, 0.6), rgba(0, 0, 255, 0.5) 74%);
+    background-repeat: repeat-x;
+}
+/*@media (min-width: 201px) and (max-width: 767px) {
+   .back {
+    position: relative;
+    right: 0;
+    vertical-align: bottom;
+    top: 5px;
+    left: 50px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .back {
+    position: relative;
+    right: 0;
+    vertical-align: bottom;
+    top: 50px;
+    left: 150px;
+    }
+}*/
+
 
 /*.zoom_img img{
 -moz-transition:-moz-transform 0.5s ease-in; 
@@ -284,3 +345,383 @@ footer {
 -o-transform:scale(1.2);
 }
    */
+@media (max-width: 767px){
+.carousel .row .span3 {
+display: block;
+float: left;
+width: 25%;
+margin-left: 0;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+}
+
+.user-order-block {
+    padding-top: 50px;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 50px;
+    background: #fff;
+}
+
+.user-column-title {
+    font-size: 30px;
+    margin: 0;
+    color: #616161;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.user-order-block .order-unit-container {
+    border: 1px solid #e0e0e0;
+    padding-right: 30px;
+    padding-top: 23px;
+    padding-left: 28px;
+    padding-bottom: 40px;
+}
+
+.user-order-block .order-paid .order-unit-container, .user-order-block .order-shipping .order-unit-container {
+    border-left: 2px solid #83c44e;
+}
+
+.user-order-block .order-content-block {
+    margin-top: 20px;
+}
+
+.user-order-block .order-unit {
+    margin-bottom: 20px;
+}
+
+.user-order-block .order-paid .order-unit-title, .user-order-block .order-shipping .order-unit-title {
+    color: #83c44e;
+}
+.user-order-block .order-unit-title {
+    margin: 0px;
+    font-size: 22px;
+}
+
+.user-order-block .order-unit-info-list {
+    margin-top: 20px;
+}
+
+.user-order-block .order-goods-list-info {
+    position: relative;
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 30px;
+}
+
+.user-order-block .order-goods-list-info .right-goods-block {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
+
+.user-order-block .order-unit-goods-info .left-goods-img {
+    width: 80px;
+    float: left;
+}
+.user-order-block .order-unit-goods-info .mid-goods-name {
+    float: left;
+    padding-top: 20px;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #000;
+    line-height: 20px;
+}
+.user-order-block .order-goods-list-info .right-goods-block .btn {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.user-order-block .order-unit-info-list:after {
+    clear: both;
+}
+.user-order-block .order-unit-goods-info:before, .user-order-block .order-unit-goods-info:after {
+    content: " ";
+    display: table;
+}
+
+.user-order-block .order-unit-info-list:before, .user-order-block .order-unit-info-list:after {
+    content: " ";
+    display: table;
+}
+
+.user-order-block .order-unit-goods-info:after {
+    clear: both;
+}
+.user-order-block .order-unit-info-list {
+    margin-top: 20px;
+}
+
+.user-order-block .left-info-block li:first-child {
+    padding-left: 0px;
+}
+
+.user-order-block .left-info-block li {
+    float: left;
+    padding-left: 23px;
+    padding-right: 23px;
+    border-right: 1px solid #e0e0e0;
+    font-size: 14px;
+    height: 20px;
+    color: #757575;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .user-order-block .right-info-block {
+        float: left;
+        padding-left: 23px;
+        padding-right: 23px;
+        border-right: 1px solid #e0e0e0;
+        font-size: 14px;
+        height: 20px;
+        color: #757575;
+    }
+}
+
+@media (min-width: 201px) and (max-width: 767px) {
+    .user-order-block .right-info-block {
+        visibility: hidden;
+        max-width: 200px;
+        text-align: right;
+        font-size: 14px;
+        color: #757575;
+        margin-top: -20px;
+    }
+}
+
+.user-order-block .order-unit-goods-info:before, .user-order-block .order-unit-goods-info:after {
+    content: " ";
+    display: table;
+}
+
+
+
+/* General button style (reset) */
+.cartbtn {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	/*padding: 5px 20px;*/
+	display: inline-block;
+	margin: 5px 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.cartbtn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.cartbtn:before {
+	font-family: 'Glyphicons Halflings';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+}
+
+.icon-delete:before {
+	content: "\e00f";
+}
+
+/* Button 5 */
+.btn-5 {
+	background: #337AB7;
+	color: #fff;
+	height: 25px;
+	min-width: 80px;
+	/*line-height: 24px;*/
+	font-size: 12px;
+	 overflow: hidden; 
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.btn-5:active {
+	background: #9053a9;
+	top: 2px;
+}
+
+.btn-5 span {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+    padding: 5px;
+	-webkit-transition: all 0.3s;
+	/*-webkit-backface-visibility: hidden;*/
+	-moz-transition: all 0.3s;
+	/*-moz-backface-visibility: hidden;*/
+	transition: all 0.3s;
+	/*backface-visibility: hidden;*/
+}
+
+@media (max-width: 600px) {
+   .btn-5 span {
+          padding: 5px 0px 2px 0px;
+   }
+   .cartbtn{
+        margin: 2px 2px;
+        font-size: 9px;
+   }
+}
+
+.btn-5:before {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	line-height: 2.5;
+	font-size: 140%;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-5:active:before {
+	color: #703b87;
+}
+
+/* Button 5a */
+.btn-5a:hover span {
+	-webkit-transform: translateY(300%);
+	-moz-transform: translateY(300%);
+	-ms-transform: translateY(300%);
+	transform: translateY(300%);
+}
+
+.btn-5a:before {
+	left: 0;
+	top: -150%;
+}
+
+.btn-5a:hover:before {
+	top: -30%;    
+    color: #fff;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 320px;
+	height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 1.2s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+.compLogo {
+    height: 50%;
+    width: 50%;
+}
+
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Optional, to align inner items 
+                              horizontally inside the column */
+}
+
+.vertical-align > [class^="col-"] > div,
+.vertical-align > [class*=" col-"] > div {
+  /* flex: 1; */
+  flex-grow: 1;
+}
+
+
+/**
+ * S T Y L I N G
+ ==================================*/
+
+.vertical-align > div:first-child {
+ background: -moz-linear-gradient(0deg, rgba(4,75,149,1) 0%, rgba(191,207,222,1) 99%, rgba(191,207,222,1) 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(4,75,149,1)), color-stop(99%, rgba(191,207,222,1)), color-stop(100%, rgba(191,207,222,1))); /* safari4+,chrome */
+background: -webkit-linear-gradient(0deg, rgba(4,75,149,1) 0%, rgba(191,207,222,1) 99%, rgba(191,207,222,1) 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(0deg, rgba(4,75,149,1) 0%, rgba(191,207,222,1) 99%, rgba(191,207,222,1) 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(0deg, rgba(4,75,149,1) 0%, rgba(191,207,222,1) 99%, rgba(191,207,222,1) 100%); /* ie10+ */
+background: linear-gradient(90deg, rgba(4,75,149,1) 0%, rgba(191,207,222,1) 99%, rgba(191,207,222,1) 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#044B95', endColorstr='#BFCFDE',GradientType=1 ); /* ie6-9 */
+}
+
+.vertical-align > div:last-child {
+  background-color: rgb(190, 207, 222);
+}
+
+.productInfoRow {
+    position: relative;
+}
+
+.productInfoRow .buttonBox {
+    position: absolute;
+    bottom:0;
+    right:0;
+}
+
+.navbar-fixed-bottom {
+    bottom: 0;
+    margin-bottom: 0;
+    border-width: 1px 0 0;
+    color: #8F9464;
+    padding: 5px;
+}
